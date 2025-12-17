@@ -1,7 +1,7 @@
 /**
  * Autor: [Alejandro Hernandez]
  * Fecha: 2025-12-16
- * Descripción: Test de la funcionalidad ExpoHome (ignorar)(navegación de ingresos a Administración)
+ * Descripción: Test de la funcionalidad ExpoHome, navegación entre pestañas principales
  */
 package automation;
 
@@ -34,6 +34,10 @@ public class ExpoHomeTest {
      * 
      * Son para asegurar que se navega entre las paginas
      */
+
+    /*
+     * @Before hace la configuración inicial del WebDriver antes de cada test.
+     */
     @Before
     public void setUp() {
         driver = DriverFactory.getDriver("edge");
@@ -41,6 +45,10 @@ public class ExpoHomeTest {
         expoHomePage = new ExpoHomePage(driver);
     }
 
+    /*
+     * @test
+     * ingresosNavigationTest verifica la navegación a la pestaña Ingresos.
+     */
     @Test
     public void ingresosNavigationTest() throws InterruptedException {
         driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/ingresos");
@@ -52,6 +60,10 @@ public class ExpoHomeTest {
         utilsScreen.takeScreenshot(driver, "ExpoHomeTest_ingresosNavigation");
     }
 
+    /*
+     * @test
+     * egresosNavigationTest verifica la navegación a la pestaña Egresos.
+     */
     @Test
     public void egresosNavigationTest() throws InterruptedException {
         driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/ingresos");
@@ -63,6 +75,10 @@ public class ExpoHomeTest {
         utilsScreen.takeScreenshot(driver, "ExpoHomeTest_egresosNavigation");
     }
 
+    /*
+     * @test
+     * empresasNavigationTest verifica la navegación a la pestaña Empresas.
+     */
     @Test
     public void empresasNavigationTest() throws InterruptedException {
         driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/ingresos");
@@ -74,6 +90,10 @@ public class ExpoHomeTest {
         utilsScreen.takeScreenshot(driver, "ExpoHomeTest_empresasNavigation");
     }
 
+    /*
+     * @test
+     * totalesNavigationTest verifica la navegación a la pestaña Totales.
+     */
     @Test
     public void totalesNavigationTest() throws InterruptedException {
         driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/ingresos");
@@ -85,6 +105,11 @@ public class ExpoHomeTest {
         utilsScreen.takeScreenshot(driver, "ExpoHomeTest_totalesNavigation");
     }
 
+    /*
+     * @test
+     * administracionNavigationTest verifica la navegación a la pestaña
+     * Administración.
+     */
     @Test
     public void administracionNavigationTest() {
         // Navegar a la URL target
@@ -110,6 +135,10 @@ public class ExpoHomeTest {
         }
     }
 
+    /*
+     * @after
+     * tearDown cierra el WebDriver después de cada test.
+     */
     @After
     public void tearDown() {
         if (driver != null) {
