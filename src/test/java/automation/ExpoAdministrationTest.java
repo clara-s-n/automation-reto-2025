@@ -77,9 +77,11 @@ public class ExpoAdministrationTest {
         Assert.assertTrue("No se cargó la sección Egresos", visible);
         utilsScreen.takeScreenshot(driver, "AdministrationTest_egresos");
     }
+
     /*
-    navegarAPlanillasTest verifica la navegación a la sección Planillas de ingreso.
-    */
+     * navegarAPlanillasTest verifica la navegación a la sección Planillas de
+     * ingreso.
+     */
     @Test
     public void navegarAPlanillasTest() {
         administrationPage.clickPlanillas();
