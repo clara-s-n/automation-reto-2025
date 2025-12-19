@@ -14,12 +14,13 @@ import org.openqa.selenium.WebDriver;
 import utils.DriverFactory;
 import utils.utilsScreen;
 import pages.ExpoHomePage;
+import pages.ExpoLoginPage;
 
 public class ExpoHomeTest {
 
     private WebDriver driver;
     private ExpoHomePage expoHomePage;
-
+    private ExpoLoginPage expoLoginPage;
     /*
      * Test de navegación entre las pestañas la página principal
      * 1. Ingresos
@@ -43,6 +44,14 @@ public class ExpoHomeTest {
         driver = DriverFactory.getDriver("edge");
         utilsScreen.maximizeWindow(driver);
         expoHomePage = new ExpoHomePage(driver);
+        expoLoginPage = new ExpoLoginPage(driver);
+        driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/login");
+        expoLoginPage = new ExpoLoginPage(driver);
+        // Login antes de cada test
+        expoLoginPage.ingresarEmail("alejandro@agraria.com");
+        expoLoginPage.ingresarPassword("Contraseña1");
+        expoLoginPage.clickLogin();
+        driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/ingresos");
     }
 
     /*
@@ -51,7 +60,7 @@ public class ExpoHomeTest {
      */
     @Test
     public void ingresosNavigationTest() throws InterruptedException {
-        driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/ingresos");
+        // driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/ingresos");
         Thread.sleep(2000);
         expoHomePage.clickIngresos();
         Thread.sleep(1000);
@@ -66,7 +75,7 @@ public class ExpoHomeTest {
      */
     @Test
     public void egresosNavigationTest() throws InterruptedException {
-        driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/ingresos");
+        // driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/ingresos");
         Thread.sleep(2000);
         expoHomePage.clickEgresos();
         Thread.sleep(1000);
@@ -81,7 +90,7 @@ public class ExpoHomeTest {
      */
     @Test
     public void empresasNavigationTest() throws InterruptedException {
-        driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/ingresos");
+        // driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/ingresos");
         Thread.sleep(2000);
         expoHomePage.clickEmpresas();
         Thread.sleep(1000);
@@ -96,8 +105,8 @@ public class ExpoHomeTest {
      */
     @Test
     public void totalesNavigationTest() throws InterruptedException {
-        driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/ingresos");
-        Thread.sleep(2000);
+        // driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/ingresos");
+        Thread.sleep(4000);
         expoHomePage.clickTotales();
         Thread.sleep(1000);
         boolean totalesVisible = driver.findElements(By.xpath("//ion-title[normalize-space()='Totales']")).size() > 0;
@@ -112,9 +121,7 @@ public class ExpoHomeTest {
      */
     @Test
     public void administracionNavigationTest() {
-        // Navegar a la URL target
-        driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/ingresos");
-
+        // driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/ingresos");
         try {
             Thread.sleep(3000);
             Assert.assertTrue("Debe estar en la página de Ingresos", expoHomePage.isAtHomePage());
