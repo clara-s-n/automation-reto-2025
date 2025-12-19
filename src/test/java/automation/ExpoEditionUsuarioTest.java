@@ -13,6 +13,7 @@ import org.openqa.selenium.WebDriver;
 import utils.DriverFactory;
 import utils.utilsScreen;
 import pages.ExpoAdministrationPage;
+import pages.ExpoLoginPage;
 import pages.ExpoUsuariosPage;
 
 public class ExpoEditionUsuarioTest {
@@ -22,7 +23,7 @@ public class ExpoEditionUsuarioTest {
     private WebDriver driver;
     private ExpoUsuariosPage expoUsuariosPage;
     private ExpoAdministrationPage administrationPage;
-
+    private ExpoLoginPage expoLoginPage;
     /*
      * test editarUsuarioTest verifica la edición de un usuario existente.
      */
@@ -34,6 +35,16 @@ public class ExpoEditionUsuarioTest {
         expoUsuariosPage = new ExpoUsuariosPage(driver);
         administrationPage = new ExpoAdministrationPage(driver);
 
+        expoLoginPage = new ExpoLoginPage(driver);
+        driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/login");
+        expoLoginPage = new ExpoLoginPage(driver);
+        // Login antes de cada test
+        Thread.sleep(1000);
+        expoLoginPage.ingresarEmail("alejandro@agraria.com");
+        expoLoginPage.ingresarPassword("Contraseña1");
+        Thread.sleep(1000);
+        expoLoginPage.clickLogin();
+        Thread.sleep(1000);
         driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/administracion");
 
         administrationPage.clickUsuarios();
@@ -57,11 +68,14 @@ public class ExpoEditionUsuarioTest {
         try {
             String nombreOriginal = "usuarioTestAutomatico";
             String nuevoNombre = "usuarioEditadoAutomatico";
+            String nuevaContraseña = "pruebacontraseña";
             Thread.sleep(1000);
             expoUsuariosPage.clickEditar(nombreOriginal);
             Thread.sleep(1000);
 
             expoUsuariosPage.ingresarNombre(nuevoNombre);
+            expoUsuariosPage.ingresarNuevaPassword(nuevaContraseña);
+            Thread.sleep(1000);
             expoUsuariosPage.confirmarEdicion();
             Thread.sleep(1000);
 

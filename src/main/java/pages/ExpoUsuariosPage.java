@@ -6,10 +6,12 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.SafeClick;
 import utils.utilsScreen;
@@ -39,16 +41,22 @@ public class ExpoUsuariosPage {
     @FindBy(xpath = "//*[@id=\"ion-input-2\"]")
     private WebElement inputPassword;
 
-    // Botón CREAR
+    @FindBy(xpath = "//ion-input[@formcontrolname='password']//input")
+    private WebElement inputNuevaPassword;
+
     @FindBy(xpath = "//ion-button[contains(normalize-space(), 'Crear')]\r\n" + //
             "")
     private WebElement botonConfirmar;
-    // Botón EDITAR
-    @FindBy(xpath = "//ion-button[contains(normalize-space(), 'Editar')]")
+
+    @FindBy(xpath = "//ion-button[contains(normalize-space(), 'Guardar')]\r\n" + //
+            "")
     private WebElement botonConfirmarEdicion;
-    // Botón BORRAR
+
     @FindBy(xpath = "//ion-button[contains(normalize-space(), 'Eliminar') or contains(normalize-space(), 'Confirmar')]")
     private WebElement botonConfirmarBorrado;
+
+    @FindBy(xpath = "//ion-fab-button[.//ion-icon[@name='person-remove-outline']]")
+    private WebElement botonBorrarUsuario;
 
     public ExpoUsuariosPage(WebDriver driver) {
         this.driver = driver;
@@ -95,9 +103,10 @@ public class ExpoUsuariosPage {
     }
 
     // Editar usuario
+    // Toca la card del usuario para abrir el detalle y luego clic en Editar
     public void clickEditar(String nombre) {
-        WebElement card = driver.findElement(By.xpath(
-                "//ion-card[.//ion-card-title[contains(normalize-space(), '" + nombre + "')]]"));
+        WebElement card = tarjetaUsuario(nombre);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", card);
         safeClick.safeClick(card);
         WebElement botonEditar = driver.findElement(
                 By.xpath("//ion-button[contains(normalize-space(), 'Editar')]"));
@@ -109,14 +118,48 @@ public class ExpoUsuariosPage {
         safeClick.safeClick(botonConfirmarEdicion);
     }
 
-    // Borrar usuario
     public void clickBorrar(String nombre) {
         WebElement card = tarjetaUsuario(nombre);
-        WebElement botonBorrar = card.findElement(By.xpath(".//ion-button[contains(normalize-space(), 'Borrar')]"));
-        safeClick.safeClick(botonBorrar);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", card);
+        safeClick.safeClick(card);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+        }
+        safeClick.safeClick(botonBorrarUsuario);
     }
 
     public void confirmarBorrado() {
-        safeClick.safeClick(botonConfirmarBorrado);
+        WebElement botonEliminar = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//button[contains(@class,'alert-button-role-destructive')]")));
+        safeClick.safeClick(botonEliminar);
     }
+
+    // Borrar usuario
+
+    /*
+     * public void clickBorrar(String nombre) {
+     * WebElement card = tarjetaUsuario(nombre);
+     * ((JavascriptExecutor)
+     * driver).executeScript("arguments[0].scrollIntoView(true);", card);
+     * safeClick.safeClick(card);
+     * WebElement botonBorrar = wait.until(
+     * ExpectedConditions.visibilityOfElementLocated(By.
+     * xpath("//button[@aria-label='Eliminar usuario']")));
+     * safeClick.safeClick(botonBorrar);
+     * }
+     */
+
+    public void ingresarNuevaPassword(String nuevaPassword) {
+        inputNuevaPassword.clear();
+        inputNuevaPassword.sendKeys(nuevaPassword);
+    }
+
+    /*
+     * public void confirmarBorrado() {
+     * WebElement botonEliminar = driver.findElement(By.xpath(
+     * "//button[.//span[normalize-space()='Eliminar']]"));
+     * safeClick.safeClick(botonEliminar);
+     * }
+     */
 }

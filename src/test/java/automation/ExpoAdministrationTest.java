@@ -14,11 +14,13 @@ import org.openqa.selenium.WebDriver;
 import utils.DriverFactory;
 import utils.utilsScreen;
 import pages.ExpoAdministrationPage;
+import pages.ExpoLoginPage;
 
 public class ExpoAdministrationTest {
 
     private WebDriver driver;
     private ExpoAdministrationPage administrationPage;
+    private ExpoLoginPage expoLoginPage;
 
     /*
      * @before
@@ -30,6 +32,13 @@ public class ExpoAdministrationTest {
         driver = DriverFactory.getDriver("edge");
         utilsScreen.maximizeWindow(driver);
         administrationPage = new ExpoAdministrationPage(driver);
+        expoLoginPage = new ExpoLoginPage(driver);
+        driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/login");
+        expoLoginPage = new ExpoLoginPage(driver);
+        // Login antes de cada test
+        expoLoginPage.ingresarEmail("alejandro@agraria.com");
+        expoLoginPage.ingresarPassword("Contraseña1");
+        expoLoginPage.clickLogin();
         driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/administracion");
     }
 
@@ -38,10 +47,13 @@ public class ExpoAdministrationTest {
      * navegarAUsuariosTest verifica la navegación a la sección Usuarios.
      */
     @Test
-    public void navegarAUsuariosTest() {
+    public void navegarAUsuariosTest() throws Exception {
+        Thread.sleep(2000);
         administrationPage.clickUsuarios();
+        Thread.sleep(2000);
         boolean visible = driver.findElements(By.xpath("//ion-title[contains(text(),'Usuarios')]")).size() > 0;
         Assert.assertTrue("No se cargó la sección Usuarios", visible);
+        Thread.sleep(2000);
         utilsScreen.takeScreenshot(driver, "AdministrationTest_usuarios");
     }
 
@@ -49,8 +61,10 @@ public class ExpoAdministrationTest {
      * navegaraACategoriasTest verifica la navegación a la sección Categorías.
      */
     @Test
-    public void navegarACategoriasTest() {
+    public void navegarACategoriasTest() throws Exception {
+        Thread.sleep(2000);
         administrationPage.clickCategorias();
+        Thread.sleep(2000);
         boolean visible = driver.findElements(By.xpath("//ion-title[contains(text(),'Categorías')]")).size() > 0;
         Assert.assertTrue("No se cargó la sección Categorías", visible);
         utilsScreen.takeScreenshot(driver, "AdministrationTest_categorias");
@@ -60,8 +74,10 @@ public class ExpoAdministrationTest {
      */
 
     @Test
-    public void navegarAAniosTest() {
+    public void navegarAAniosTest() throws Exception {
+        Thread.sleep(2000);
         administrationPage.clickAnios();
+        Thread.sleep(2000);
         boolean visible = driver.findElements(By.xpath("//ion-title[contains(text(),'Años')]")).size() > 0;
         Assert.assertTrue("No se cargó la sección Años", visible);
         utilsScreen.takeScreenshot(driver, "AdministrationTest_anios");
@@ -71,8 +87,10 @@ public class ExpoAdministrationTest {
      * navegarAEgresosTest verifica la navegación a la sección Egresos.
      */
     @Test
-    public void navegarAEgresosTest() {
+    public void navegarAEgresosTest() throws Exception {
+        Thread.sleep(2000);
         administrationPage.clickEgresos();
+        Thread.sleep(2000);
         boolean visible = driver.findElements(By.xpath("//ion-title[contains(text(),'Egresos')]")).size() > 0;
         Assert.assertTrue("No se cargó la sección Egresos", visible);
         utilsScreen.takeScreenshot(driver, "AdministrationTest_egresos");
@@ -83,8 +101,10 @@ public class ExpoAdministrationTest {
      * ingreso.
      */
     @Test
-    public void navegarAPlanillasTest() {
+    public void navegarAPlanillasTest() throws Exception {
+        Thread.sleep(2000);
         administrationPage.clickPlanillas();
+        Thread.sleep(2000);
         boolean visible = driver.findElements(By.xpath("//ion-title[contains(text(),'Planillas')]")).size() > 0;
         Assert.assertTrue("No se cargó la sección Planillas de ingreso", visible);
         utilsScreen.takeScreenshot(driver, "AdministrationTest_planillas");

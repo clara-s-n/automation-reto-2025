@@ -15,12 +15,14 @@ import utils.DriverFactory;
 import utils.utilsScreen;
 import pages.ExpoUsuariosPage;
 import pages.ExpoAdministrationPage;
+import pages.ExpoLoginPage;
 
 public class ExpoCreationUsuarioTest {
 
     private WebDriver driver;
     private ExpoUsuariosPage expoCreationUsuariosPage;
     private ExpoAdministrationPage administrationPage;
+    private ExpoLoginPage expoLoginPage;
 
     /*
      * @before
@@ -28,11 +30,21 @@ public class ExpoCreationUsuarioTest {
      * cada test.
      */
     @Before
-    public void setUp() {
+    public void setUp() throws InterruptedException {
         driver = DriverFactory.getDriver("edge");
         utilsScreen.maximizeWindow(driver);
         expoCreationUsuariosPage = new ExpoUsuariosPage(driver);
         administrationPage = new ExpoAdministrationPage(driver);
+        expoLoginPage = new ExpoLoginPage(driver);
+        driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/login");
+        expoLoginPage = new ExpoLoginPage(driver);
+        // Login antes de cada test
+        Thread.sleep(1000);
+        expoLoginPage.ingresarEmail("alejandro@agraria.com");
+        expoLoginPage.ingresarPassword("Contraseña1");
+        Thread.sleep(1000);
+        expoLoginPage.clickLogin();
+        Thread.sleep(1000);
         driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/ingresos");
     }
 
@@ -49,6 +61,7 @@ public class ExpoCreationUsuarioTest {
     @Test
     public void crearUsuarioTest() throws Exception {
         try {
+            Thread.sleep(1500);
             driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/administracion");
             Thread.sleep(1500);
             administrationPage.clickUsuarios();
@@ -91,6 +104,7 @@ public class ExpoCreationUsuarioTest {
     @Test
     public void crearUsuarioConAdministradorActivoTest() throws Exception {
         try {
+            Thread.sleep(1500);
             driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/administracion");
             Thread.sleep(1500);
             administrationPage.clickUsuarios();
