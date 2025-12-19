@@ -41,11 +41,13 @@ public class ExpoLoginPage {
     private WebElement botonLogin;
 
     public void ingresarEmail(String email) {
+        wait.until(org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf(inputEmail));
         inputEmail.clear();
         inputEmail.sendKeys(email);
     }
 
     public void ingresarPassword(String password) {
+        wait.until(org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf(inputPassword));
         inputPassword.clear();
         inputPassword.sendKeys(password);
     }

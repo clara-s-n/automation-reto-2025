@@ -5,20 +5,16 @@
  */
 package automation;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import utils.DriverFactory;
 import utils.utilsScreen;
 import pages.ExpoHomePage;
 import pages.ExpoLoginPage;
 
-public class ExpoHomeTest {
+public class ExpoHomeTest extends BaseTest {
 
-    private WebDriver driver;
     private ExpoHomePage expoHomePage;
     private ExpoLoginPage expoLoginPage;
     /*
@@ -40,9 +36,7 @@ public class ExpoHomeTest {
      * @Before hace la configuración inicial del WebDriver antes de cada test.
      */
     @Before
-    public void setUp() {
-        driver = DriverFactory.getDriver("edge");
-        utilsScreen.maximizeWindow(driver);
+    public void setUpHome() {
         expoHomePage = new ExpoHomePage(driver);
         expoLoginPage = new ExpoLoginPage(driver);
         driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/login");
@@ -139,17 +133,6 @@ public class ExpoHomeTest {
         } finally {
             // Captura de pantalla al final del test
             utilsScreen.takeScreenshot(driver, "ExpoHomeTest_administracionNavigation");
-        }
-    }
-
-    /*
-     * @after
-     * tearDown cierra el WebDriver después de cada test.
-     */
-    @After
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
         }
     }
 }

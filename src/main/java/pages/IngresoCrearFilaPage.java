@@ -5,13 +5,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class IngresoCrearFilaPage {
 
     private WebDriver driver;
+    private WebDriverWait wait;
 
     public IngresoCrearFilaPage(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(driver, this);
     }
 
@@ -73,8 +79,10 @@ public class IngresoCrearFilaPage {
 
         selectEmpresa.click();
         Thread.sleep(2000);
-        driver.findElement(By.xpath("//ion-select-popover//ion-item[contains(.,'Baiz')]")).click();
 
+        WebElement empresaOption = wait.until(ExpectedConditions
+                .presenceOfElementLocated(By.xpath("//ion-select-popover//ion-item[contains(.,'Baiz')]")));
+        empresaOption.click();
 
 
         guardarFila.click();
