@@ -4,13 +4,22 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.SafeClick;
+
+import java.time.Duration;
 
 public class EgresosCrearEmpresaPage {
 
     private WebDriver driver;
+    private WebDriverWait wait;
+    private SafeClick safeClick;
 
     public EgresosCrearEmpresaPage(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.safeClick = new SafeClick(driver, wait);
         PageFactory.initElements(driver, this);
     }
 
@@ -60,12 +69,15 @@ public class EgresosCrearEmpresaPage {
     }
 
     public void crearEmpresa() throws InterruptedException {
-        tabEmpresas.click();
-        Thread.sleep(4000);
+        wait.until(ExpectedConditions.elementToBeClickable(tabEmpresas));
+        safeClick.safeClick(tabEmpresas);
+        Thread.sleep(2000);
 
-        botonCrear.click();
-        Thread.sleep(4000);
+        wait.until(ExpectedConditions.elementToBeClickable(botonCrear));
+        safeClick.safeClick(botonCrear);
+        Thread.sleep(2000);
 
+        wait.until(ExpectedConditions.visibilityOf(inputNombre));
         inputNombre.sendKeys("Empresa Test");
         inputEmail.sendKeys("empresa@test.com");
         inputRazonSocial.sendKeys("Empresa Test SA");
@@ -74,6 +86,8 @@ public class EgresosCrearEmpresaPage {
         inputNombreContacto.sendKeys("Juan Pérez");
         inputTelefonoContacto.sendKeys("099123456");
 
-        botonGuardar.click();
+        wait.until(ExpectedConditions.elementToBeClickable(botonGuardar));
+        safeClick.safeClick(botonGuardar);
     }
 }
+

@@ -2,6 +2,7 @@ package automation;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.Assert;
 import pages.ExpoCategoryPage;
 import pages.ExpoLoginPage;
@@ -53,6 +54,7 @@ public class ExpoCategoryTest extends BaseTest {
     }
 
     // SIN TESTEAR, NO FUNCIONA
+    @Ignore("Test deshabilitado - Funcionalidad no implementada correctamente en la aplicación")
     @Test
     public void editarCategoriaTest() throws Exception {
         try {

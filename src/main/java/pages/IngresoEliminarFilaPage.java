@@ -4,13 +4,22 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.SafeClick;
+
+import java.time.Duration;
 
 public class IngresoEliminarFilaPage {
 
     private WebDriver driver;
+    private WebDriverWait wait;
+    private SafeClick safeClick;
 
     public IngresoEliminarFilaPage(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.safeClick = new SafeClick(driver, wait);
         PageFactory.initElements(driver, this);
     }
 
@@ -32,7 +41,7 @@ public class IngresoEliminarFilaPage {
     @FindBy(xpath = "/html/body/app-root/ion-app/ion-router-outlet/app-tabs/ion-tabs/div/ion-router-outlet/app-editar-fila-ingresos/ion-content/ion-fab/ion-fab-button")
     private WebElement botonEliminarFila;
 
-    @FindBy(xpath = "/html/body/app-root/ion-app/ion-action-sheet/div[2]/div/div[1]/button")
+    @FindBy(xpath = "/html/body/app-root/ion-action-sheet/div[2]/div/div[1]/button")
     private WebElement botonEliminarFinal;
 
     public void hacerLogin(String email, String password) {
@@ -42,18 +51,23 @@ public class IngresoEliminarFilaPage {
     }
 
     public void abrirPrimerIngreso() {
-        primerIngreso.click();
+        wait.until(ExpectedConditions.elementToBeClickable(primerIngreso));
+        safeClick.safeClick(primerIngreso);
     }
 
     public void abrirPrimeraFila() {
-        primeraFila.click();
+        wait.until(ExpectedConditions.elementToBeClickable(primeraFila));
+        safeClick.safeClick(primeraFila);
     }
 
     public void eliminarFila() {
-        botonEliminarFila.click();
+        wait.until(ExpectedConditions.elementToBeClickable(botonEliminarFila));
+        safeClick.safeClick(botonEliminarFila);
     }
 
     public void eliminarFinal(){
-        botonEliminarFinal.click();
+        wait.until(ExpectedConditions.elementToBeClickable(botonEliminarFinal));
+        safeClick.safeClick(botonEliminarFinal);
     }
 }
+
