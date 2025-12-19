@@ -16,10 +16,19 @@ public class SafeClick {
         this.wait = wait;
     }
 
+    // metodo para inputs ocultos con el label negro
+    public void labelHideInput(WebElement element, String text) {
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].value = arguments[1];" +
+                        "arguments[0].dispatchEvent(new Event('input'));" +
+                        "arguments[0].dispatchEvent(new Event('change'));",
+                element, text);
+    }
+
     // =========================
     // Helpers
     // =========================
-    public void safeClick(WebElement element){
+    public void safeClick(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
         for (int i = 0; i < 5; i++) {
             scrollToCenter(element);
@@ -49,16 +58,17 @@ public class SafeClick {
             }
         }
 
-        // Fallback FINAL (no ideal, pero evita que el test muera si el sitio mete ads agresivos)
+        // Fallback FINAL (no ideal, pero evita que el test muera si el sitio mete ads
+        // agresivos)
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
 
-    private void scrollToCenter (WebElement element){
+    private void scrollToCenter(WebElement element) {
         ((JavascriptExecutor) driver).executeScript(
                 "arguments[0].scrollIntoView({block:'center', inline:'nearest'});", element);
     }
 
-    private boolean isCovered (WebElement element){
+    private boolean isCovered(WebElement element) {
         Object result = ((JavascriptExecutor) driver).executeScript(
                 "const el = arguments[0];" +
                         "const r = el.getBoundingClientRect();" +
@@ -70,7 +80,7 @@ public class SafeClick {
         return result instanceof Boolean && (Boolean) result;
     }
 
-    private WebElement topElementAtCenter (WebElement element){
+    private WebElement topElementAtCenter(WebElement element) {
         Object el = ((JavascriptExecutor) driver).executeScript(
                 "const target = arguments[0];" +
                         "const r = target.getBoundingClientRect();" +
@@ -81,7 +91,7 @@ public class SafeClick {
         return (el instanceof WebElement) ? (WebElement) el : null;
     }
 
-    private boolean isAdIframe (WebElement iframe){
+    private boolean isAdIframe(WebElement iframe) {
         String id = safeLower(iframe.getAttribute("id"));
         String name = safeLower(iframe.getAttribute("name"));
         String title = safeLower(iframe.getAttribute("title"));
@@ -95,10 +105,9 @@ public class SafeClick {
                 || src.contains("googleads");
     }
 
-    private void hideCommonAdIframes () {
+    private void hideCommonAdIframes() {
         List<WebElement> frames = driver.findElements(By.cssSelector(
-                "iframe[id^='aswift'], iframe[name^='aswift'], iframe[id*='google_ads_iframe'], iframe[title*='Advertisement'], iframe[src*='doubleclick'], iframe[src*='googleads']"
-        ));
+                "iframe[id^='aswift'], iframe[name^='aswift'], iframe[id*='google_ads_iframe'], iframe[title*='Advertisement'], iframe[src*='doubleclick'], iframe[src*='googleads']"));
         for (WebElement f : frames) {
             try {
                 hideElement(f);
@@ -107,7 +116,7 @@ public class SafeClick {
         }
     }
 
-    private void hideElement (WebElement el){
+    private void hideElement(WebElement el) {
         ((JavascriptExecutor) driver).executeScript(
                 "arguments[0].style.setProperty('display','none','important');" +
                         "arguments[0].style.setProperty('visibility','hidden','important');" +
@@ -115,11 +124,11 @@ public class SafeClick {
                 el);
     }
 
-    private WebElement bodyOrHtml () {
+    private WebElement bodyOrHtml() {
         return driver.findElement(By.cssSelector("body"));
     }
 
-    private void hideParentsUpTo (WebElement stopAt, WebElement child,int levels){
+    private void hideParentsUpTo(WebElement stopAt, WebElement child, int levels) {
         ((JavascriptExecutor) driver).executeScript(
                 "let el = arguments[0];" +
                         "let stop = arguments[1];" +
@@ -128,11 +137,10 @@ public class SafeClick {
                         "  el = el.parentElement;" +
                         "  el.style.setProperty('display','none','important');" +
                         "}",
-                child, stopAt, levels
-        );
+                child, stopAt, levels);
     }
 
-    private String safeLower (String s){
+    private String safeLower(String s) {
         return s == null ? "" : s.toLowerCase();
     }
 
