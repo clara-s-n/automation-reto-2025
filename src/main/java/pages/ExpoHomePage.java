@@ -68,8 +68,8 @@ public class ExpoHomePage {
 
     public void clickNavItem(String label) {
         try {
-            WebElement el = driver.findElement(
-                    By.xpath("//a[normalize-space()='" + label + "']|//button[normalize-space()='" + label + "']"));
+            WebElement el = wait.until(org.openqa.selenium.support.ui.ExpectedConditions
+                    .presenceOfElementLocated(By.xpath("//a[normalize-space()='" + label + "']|//button[normalize-space()='" + label + "']")));
             safeClick.safeClick(el);
         } catch (Exception e) {
             // capturar pantalla en caso de fallo

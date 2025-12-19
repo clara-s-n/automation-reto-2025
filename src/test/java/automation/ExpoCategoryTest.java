@@ -1,28 +1,20 @@
 package automation;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
 import org.junit.Assert;
 import pages.ExpoCategoryPage;
 import pages.ExpoLoginPage;
 import pages.ExpoAdministrationPage;
-import utils.DriverFactory;
-import utils.utilsScreen;
 
-public class ExpoCategoryTest {
+public class ExpoCategoryTest extends BaseTest {
 
-    private WebDriver driver;
     private ExpoLoginPage loginPage;
     private ExpoAdministrationPage administrationPage;
     private ExpoCategoryPage categoryPage;
 
     @Before
-    public void setUp() throws InterruptedException {
-        driver = DriverFactory.getDriver("edge");
-        utilsScreen.maximizeWindow(driver);
-
+    public void setUpCategory() throws InterruptedException {
         loginPage = new ExpoLoginPage(driver);
         administrationPage = new ExpoAdministrationPage(driver);
         categoryPage = new ExpoCategoryPage(driver);
@@ -80,11 +72,5 @@ public class ExpoCategoryTest {
             categoryPage.takeScreenshot("editarCategoria_error");
             throw e;
         }
-    }
-
-    @After
-    public void tearDown() {
-        if (driver != null)
-            driver.quit();
     }
 }

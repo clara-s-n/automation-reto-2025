@@ -5,29 +5,21 @@
  */
 package automation;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
-import utils.DriverFactory;
-import utils.utilsScreen;
 import pages.ExpoAdministrationPage;
 import pages.ExpoLoginPage;
 import pages.ExpoUsuariosPage;
 
-public class ExpoDeleteUsuarioTest {
+public class ExpoDeleteUsuarioTest extends BaseTest {
 
-    private WebDriver driver;
     private ExpoUsuariosPage expoUsuariosPage;
     private ExpoAdministrationPage administrationPage;
     private ExpoLoginPage expoLoginPage;
 
     @Before
-    public void setUp() throws InterruptedException {
-        driver = DriverFactory.getDriver("edge");
-        utilsScreen.maximizeWindow(driver);
-
+    public void setUpDelete() throws InterruptedException {
         expoUsuariosPage = new ExpoUsuariosPage(driver);
         administrationPage = new ExpoAdministrationPage(driver);
         expoLoginPage = new ExpoLoginPage(driver);
@@ -59,11 +51,5 @@ public class ExpoDeleteUsuarioTest {
             expoUsuariosPage.takeScreenshot("borrarUsuario_error");
             throw error;
         }
-    }
-
-    @After
-    public void tearDown() {
-        if (driver != null)
-            driver.quit();
     }
 }

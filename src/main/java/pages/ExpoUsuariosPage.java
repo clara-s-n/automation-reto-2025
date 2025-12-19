@@ -108,8 +108,8 @@ public class ExpoUsuariosPage {
         WebElement card = tarjetaUsuario(nombre);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", card);
         safeClick.safeClick(card);
-        WebElement botonEditar = driver.findElement(
-                By.xpath("//ion-button[contains(normalize-space(), 'Editar')]"));
+        WebElement botonEditar = wait.until(ExpectedConditions
+                .presenceOfElementLocated(By.xpath("//ion-button[contains(normalize-space(), 'Editar')]")));
 
         safeClick.safeClick(botonEditar);
     }

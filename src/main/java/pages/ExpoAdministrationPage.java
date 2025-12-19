@@ -87,7 +87,8 @@ public class ExpoAdministrationPage {
         }
 
         try {
-            WebElement fallback = driver.findElement(By.xpath("//*[normalize-space()='" + nombre + "']"));
+            WebElement fallback = wait.until(org.openqa.selenium.support.ui.ExpectedConditions
+                    .presenceOfElementLocated(By.xpath("//*[normalize-space()='" + nombre + "']")));
             safeClick.safeClick(fallback);
         } catch (Exception error) {
             utilsScreen.takeScreenshot(driver, "administration_click_" + nombre.replaceAll("\\s+", "_") + "_error");

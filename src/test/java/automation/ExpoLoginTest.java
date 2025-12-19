@@ -1,25 +1,18 @@
 package automation;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import utils.DriverFactory;
-import utils.utilsScreen;
 import pages.ExpoLoginPage;
+import utils.utilsScreen;
 
 import static org.junit.Assert.assertTrue;
 
-public class ExpoLoginTest {
+public class ExpoLoginTest extends BaseTest {
 
-    private WebDriver driver;
     private ExpoLoginPage loginPage;
 
     @Before
-    public void setUp() {
-        driver = DriverFactory.getDriver("edge");
-        utilsScreen.maximizeWindow(driver);
-
+    public void setUpLogin() {
         driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/login");
         loginPage = new ExpoLoginPage(driver);
 
@@ -54,11 +47,5 @@ public class ExpoLoginTest {
         assertTrue("No se volvió al login", driver.getCurrentUrl().contains("/login"));
 
         utilsScreen.takeScreenshot(driver, "logout_exito");
-    }
-
-    @After
-    public void tearDown() {
-        if (driver != null)
-            driver.quit();
     }
 }

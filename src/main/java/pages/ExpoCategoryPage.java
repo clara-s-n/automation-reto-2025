@@ -75,12 +75,14 @@ public class ExpoCategoryPage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", card);
         safeClick.safeClick(card);
 
-        WebElement botonEditar = driver.findElement(By.xpath("//ion-button[normalize-space()='EDITAR']"));
+        WebElement botonEditar = wait.until(org.openqa.selenium.support.ui.ExpectedConditions
+                .presenceOfElementLocated(By.xpath("//ion-button[normalize-space()='EDITAR']")));
         safeClick.safeClick(botonEditar);
     }
 
     public void confirmarEdicion() {
-        WebElement botonGuardar = driver.findElement(By.xpath("//ion-button[normalize-space()='Guardar']"));
+        WebElement botonGuardar = wait.until(org.openqa.selenium.support.ui.ExpectedConditions
+                .presenceOfElementLocated(By.xpath("//ion-button[normalize-space()='Guardar']")));
         safeClick.safeClick(botonGuardar);
     }
 

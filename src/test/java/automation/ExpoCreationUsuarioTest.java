@@ -5,21 +5,17 @@
  */
 package automation;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import utils.DriverFactory;
 import utils.utilsScreen;
 import pages.ExpoUsuariosPage;
 import pages.ExpoAdministrationPage;
 import pages.ExpoLoginPage;
 
-public class ExpoCreationUsuarioTest {
+public class ExpoCreationUsuarioTest extends BaseTest {
 
-    private WebDriver driver;
     private ExpoUsuariosPage expoCreationUsuariosPage;
     private ExpoAdministrationPage administrationPage;
     private ExpoLoginPage expoLoginPage;
@@ -30,9 +26,7 @@ public class ExpoCreationUsuarioTest {
      * cada test.
      */
     @Before
-    public void setUp() throws InterruptedException {
-        driver = DriverFactory.getDriver("edge");
-        utilsScreen.maximizeWindow(driver);
+    public void setUpUsuario() throws InterruptedException {
         expoCreationUsuariosPage = new ExpoUsuariosPage(driver);
         administrationPage = new ExpoAdministrationPage(driver);
         expoLoginPage = new ExpoLoginPage(driver);
@@ -126,13 +120,6 @@ public class ExpoCreationUsuarioTest {
         } catch (Exception error) {
             expoCreationUsuariosPage.takeScreenshot("CrearUsuarioAdministradorToggleTest_error");
             throw error;
-        }
-    }
-
-    @After
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
         }
     }
 }

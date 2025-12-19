@@ -5,20 +5,16 @@
  */
 package automation;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import utils.DriverFactory;
 import utils.utilsScreen;
 import pages.ExpoAdministrationPage;
 import pages.ExpoLoginPage;
 
-public class ExpoAdministrationTest {
+public class ExpoAdministrationTest extends BaseTest {
 
-    private WebDriver driver;
     private ExpoAdministrationPage administrationPage;
     private ExpoLoginPage expoLoginPage;
 
@@ -28,9 +24,7 @@ public class ExpoAdministrationTest {
      * cada test.
      */
     @Before
-    public void setUp() {
-        driver = DriverFactory.getDriver("edge");
-        utilsScreen.maximizeWindow(driver);
+    public void setUpAdmin() {
         administrationPage = new ExpoAdministrationPage(driver);
         expoLoginPage = new ExpoLoginPage(driver);
         driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/login");
@@ -108,12 +102,5 @@ public class ExpoAdministrationTest {
         boolean visible = driver.findElements(By.xpath("//ion-title[contains(text(),'Planillas')]")).size() > 0;
         Assert.assertTrue("No se cargó la sección Planillas de ingreso", visible);
         utilsScreen.takeScreenshot(driver, "AdministrationTest_planillas");
-    }
-
-    @After
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
     }
 }
