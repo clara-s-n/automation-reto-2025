@@ -68,6 +68,6 @@ public class DriverFactory {
      * @return Nombre del navegador configurado
      */
     public static String getConfiguredBrowser() {
-        return System.getProperty("browser", "edge");
+        return System.getProperty("browser", "chrome");
     }
 }

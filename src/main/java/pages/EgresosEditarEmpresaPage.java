@@ -32,6 +32,9 @@ public class EgresosEditarEmpresaPage {
     @FindBy(xpath = "//ion-button[.//text()[normalize-space()='Editar']]")
     private WebElement botonEditar;
 
+    @FindBy(xpath = "//*[@id=\"ion-input-2\"]")
+    private WebElement inputNombre;
+
     @FindBy(xpath = "//*[@id=\"ion-input-6\"]")
     private WebElement inputCI;
 
@@ -42,6 +45,21 @@ public class EgresosEditarEmpresaPage {
         inputEmail.sendKeys(email);
         inputPassword.sendKeys(password);
         botonLogin.click();
+    }
+
+    public void editarEmpresa(String nombre) throws InterruptedException {
+        tabEmpresas.click();
+        Thread.sleep(4000);
+
+        primeraEmpresa.click();
+        Thread.sleep(4000);
+
+        botonEditar.click();
+        Thread.sleep(3000);
+
+        inputNombre.clear();
+        inputNombre.sendKeys(nombre);
+        botonGuardar.click();
     }
 
     public void editarCI(String ci) throws InterruptedException {
