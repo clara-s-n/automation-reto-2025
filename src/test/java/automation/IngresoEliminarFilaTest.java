@@ -2,6 +2,7 @@ package automation;
 
 import org.junit.Test;
 import pages.IngresoEliminarFilaPage;
+import utils.utilsScreen;
 
 public class IngresoEliminarFilaTest extends BaseTest {
 
@@ -12,7 +13,7 @@ public class IngresoEliminarFilaTest extends BaseTest {
         Thread.sleep(2000);
 
         IngresoEliminarFilaPage page = new IngresoEliminarFilaPage(driver);
-        page.hacerLogin("lautaro@agraria.com", "Contraseña1");
+        page.hacerLogin("juan@agraria.com", "Contraseña1");
 
         Thread.sleep(1000);
 

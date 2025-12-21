@@ -78,5 +78,29 @@ public class IngresoCrearFilaPage {
 
 
         guardarFila.click();
+
+
     }
+    public void crearNuevaFila2() {
+        botonNuevaFila.click();
+    }
+
+    public void completarFormulario2(String fila, String desc, Integer monto) throws InterruptedException {
+        numFila.clear();
+        numFila.sendKeys(fila);
+
+        descripcion.sendKeys(desc);
+        
+        precio.click();
+        precio.sendKeys(monto.toString());
+
+        selectEmpresa.click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//ion-select-popover//ion-item[contains(.,'Baiz')]")).click();
+
+
+
+        guardarFila.click();
+    }
+
 }

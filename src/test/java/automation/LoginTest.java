@@ -2,13 +2,17 @@ package automation;
 
 import org.junit.Assert;
 import org.junit.Test;
+import utils.utilsScreen;
 
 import pages.LoginPage;
 
 public class LoginTest extends BaseTest {
+    
 
     @Test
     public void loginTest() throws InterruptedException {
+
+        utilsScreen.maximizeWindow(driver);
 
         driver.navigate().to("https://reto2025.brazilsouth.cloudapp.azure.com/login");
         Thread.sleep(2000);
@@ -22,6 +26,7 @@ public class LoginTest extends BaseTest {
         page.clickIngresar();
 
         Thread.sleep(5000);
+        utilsScreen.takeScreenshot(driver, "Login");
 
         Assert.assertTrue(driver.getCurrentUrl().contains("/ingresos"));
     }
