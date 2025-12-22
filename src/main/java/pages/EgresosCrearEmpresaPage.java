@@ -71,7 +71,7 @@ public class EgresosCrearEmpresaPage {
 
     public void crearEmpresa() throws InterruptedException {
         org.openqa.selenium.JavascriptExecutor js = (org.openqa.selenium.JavascriptExecutor) driver;
-        
+
         // Navegar a empresas
         wait.until(ExpectedConditions.elementToBeClickable(tabEmpresas));
         safeClick.safeClick(tabEmpresas);
@@ -84,25 +84,25 @@ public class EgresosCrearEmpresaPage {
 
         // Esperar a que aparezca cualquier input en el formulario
         wait.until(ExpectedConditions.presenceOfElementLocated(
-            org.openqa.selenium.By.cssSelector("ion-input")));
+                org.openqa.selenium.By.cssSelector("ion-input")));
         Thread.sleep(1000);
 
         // En Ionic, necesitamos usar JavaScript para interactuar con los inputs
         java.util.List<WebElement> ionInputs = driver.findElements(
-            org.openqa.selenium.By.cssSelector("ion-input"));
-        
-        String[] valores = {"Empresa Test", "empresa@test.com", "Empresa Test SA", 
-                           "123456780019", "45678912", "Juan Pérez", "099123456"};
-        
+                org.openqa.selenium.By.cssSelector("ion-input"));
+
+        String[] valores = { "Empresa Test", "empresa@test.com", "Empresa Test SA",
+                "123456780019", "45678912", "Juan Pérez", "099123456" };
+
         for (int i = 0; i < Math.min(ionInputs.size(), valores.length); i++) {
             WebElement ionInput = ionInputs.get(i);
             // Hacer scroll al elemento si es necesario
             js.executeScript("arguments[0].scrollIntoView({block: 'center'});", ionInput);
             Thread.sleep(200);
-            
+
             // Usar JavaScript para establecer el valor en ion-input
             js.executeScript("arguments[0].value = arguments[1];", ionInput, valores[i]);
-            
+
             // También intentar establecer en el input nativo si existe
             try {
                 WebElement nativeInput = ionInput.findElement(org.openqa.selenium.By.cssSelector("input"));
@@ -122,4 +122,3 @@ public class EgresosCrearEmpresaPage {
         js.executeScript("arguments[0].click();", botonGuardar);
     }
 }
-

@@ -52,9 +52,9 @@ public class IngresoEliminarFilaPage {
 
     public void abrirPrimerIngreso() {
         wait.until(ExpectedConditions.presenceOfElementLocated(
-            org.openqa.selenium.By.cssSelector("ion-card")));
+                org.openqa.selenium.By.cssSelector("ion-card")));
         java.util.List<WebElement> cards = driver.findElements(
-            org.openqa.selenium.By.cssSelector("ion-card"));
+                org.openqa.selenium.By.cssSelector("ion-card"));
         if (!cards.isEmpty()) {
             wait.until(ExpectedConditions.elementToBeClickable(cards.get(0)));
             safeClick.safeClick(cards.get(0));
@@ -64,11 +64,12 @@ public class IngresoEliminarFilaPage {
     public void abrirPrimeraFila() {
         try {
             Thread.sleep(2000);
-        } catch (InterruptedException e) {}
+        } catch (InterruptedException e) {
+        }
         wait.until(ExpectedConditions.presenceOfElementLocated(
-            org.openqa.selenium.By.cssSelector("ion-card")));
+                org.openqa.selenium.By.cssSelector("ion-card")));
         java.util.List<WebElement> cards = driver.findElements(
-            org.openqa.selenium.By.cssSelector("ion-card"));
+                org.openqa.selenium.By.cssSelector("ion-card"));
         if (!cards.isEmpty()) {
             wait.until(ExpectedConditions.elementToBeClickable(cards.get(0)));
             safeClick.safeClick(cards.get(0));
@@ -78,25 +79,27 @@ public class IngresoEliminarFilaPage {
     public void eliminarFila() {
         try {
             Thread.sleep(2000);
-        } catch (InterruptedException e) {}
+        } catch (InterruptedException e) {
+        }
         // Buscar el FAB button para eliminar
         wait.until(ExpectedConditions.presenceOfElementLocated(
-            org.openqa.selenium.By.cssSelector("ion-fab-button")));
+                org.openqa.selenium.By.cssSelector("ion-fab-button")));
         WebElement fabButton = driver.findElement(
-            org.openqa.selenium.By.cssSelector("ion-fab-button"));
+                org.openqa.selenium.By.cssSelector("ion-fab-button"));
         wait.until(ExpectedConditions.elementToBeClickable(fabButton));
         safeClick.safeClick(fabButton);
     }
 
-    public void eliminarFinal(){
+    public void eliminarFinal() {
         try {
             Thread.sleep(1000);
-        } catch (InterruptedException e) {}
+        } catch (InterruptedException e) {
+        }
         // Buscar el botón de eliminar en el action sheet
         wait.until(ExpectedConditions.presenceOfElementLocated(
-            org.openqa.selenium.By.cssSelector("ion-action-sheet button")));
+                org.openqa.selenium.By.cssSelector("ion-action-sheet button")));
         java.util.List<WebElement> buttons = driver.findElements(
-            org.openqa.selenium.By.cssSelector("ion-action-sheet button"));
+                org.openqa.selenium.By.cssSelector("ion-action-sheet button"));
         // El primer botón suele ser "Eliminar"
         if (!buttons.isEmpty()) {
             wait.until(ExpectedConditions.elementToBeClickable(buttons.get(0)));
@@ -104,4 +107,3 @@ public class IngresoEliminarFilaPage {
         }
     }
 }
-
