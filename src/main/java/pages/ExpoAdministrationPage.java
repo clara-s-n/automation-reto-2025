@@ -48,6 +48,9 @@ public class ExpoAdministrationPage {
             "")
     private WebElement botonPlanillas;
 
+    @FindBy(xpath = "//ion-button[.//text()[normalize-space()='Acerca de']]")
+    private WebElement botonAboutUs;
+
     public ExpoAdministrationPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -74,6 +77,10 @@ public class ExpoAdministrationPage {
 
     public void clickPlanillas() {
         clickSeccion(botonPlanillas, "Planillas de ingreso");
+    }
+
+    public void clickAboutUs() {
+        clickSeccion(botonAboutUs, "Acerca de");
     }
 
     // Método para clic seguro

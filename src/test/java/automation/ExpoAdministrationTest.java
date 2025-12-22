@@ -103,4 +103,13 @@ public class ExpoAdministrationTest extends BaseTest {
         Assert.assertTrue("No se cargó la sección Planillas de ingreso", visible);
         utilsScreen.takeScreenshot(driver, "AdministrationTest_planillas");
     }
+
+    @Test
+    public void navegarAAboutUs() throws Exception {
+        Thread.sleep(2000);
+        administrationPage.clickAboutUs();
+        Thread.sleep(2000);
+        boolean visible = driver.findElements(By.xpath("//ion-title[contains(text(),'Acerca de')]")).size() > 0;
+        Assert.assertTrue("No se cargó la sección Acerca de", visible);
+    }
 }
