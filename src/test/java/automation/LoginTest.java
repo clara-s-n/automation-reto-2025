@@ -15,7 +15,7 @@ public class LoginTest extends BaseTest {
 
         LoginPage page = new LoginPage(driver);
 
-        page.ingresarEmail("lautaro@agraria.com");
+        page.ingresarEmail("ana@agraria.com");
         Thread.sleep(1000);
         page.ingresarPassword("Contraseña1");
         Thread.sleep(3000);
