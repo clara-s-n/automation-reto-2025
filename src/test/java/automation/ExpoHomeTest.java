@@ -42,7 +42,7 @@ public class ExpoHomeTest extends BaseTest {
         driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/login");
         expoLoginPage = new ExpoLoginPage(driver);
         // Login antes de cada test
-        expoLoginPage.ingresarEmail("alejandro@agraria.com");
+        expoLoginPage.ingresarEmail("ana@agraria.com");
         expoLoginPage.ingresarPassword("Contraseña1");
         expoLoginPage.clickLogin();
         driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/ingresos");

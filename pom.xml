@@ -13,10 +13,10 @@
         <!--   Ajustá esta versión si usás otro JDK (11, 17, 21, etc.)   -->
         <java.version>25</java.version>
         <!--   Versiones de dependencias   -->
-        <selenium.version>4.21.0</selenium.version>
+        <selenium.version>4.27.0</selenium.version>
         <junit.jupiter.version>5.11.3</junit.jupiter.version>
         <junit4.version>4.13.2</junit4.version>
-        <webdrivermanager.version>5.8.0</webdrivermanager.version>
+        <webdrivermanager.version>5.9.2</webdrivermanager.version>
     </properties>
 
     <dependencies>
@@ -51,6 +51,12 @@
             <groupId>io.github.cdimascio</groupId>
             <artifactId>dotenv-java</artifactId>
             <version>3.0.0</version>
+        </dependency>
+        <!--   WebDriverManager: para gestionar drivers automáticamente   -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>${webdrivermanager.version}</version>
         </dependency>
     </dependencies>
 

@@ -17,7 +17,7 @@ public class ExpoLoginTest extends BaseTest {
         loginPage = new ExpoLoginPage(driver);
 
         // Login
-        loginPage.ingresarEmail("alejandro@agraria.com");
+        loginPage.ingresarEmail("ana@agraria.com");
         loginPage.ingresarPassword("Contraseña1");
         loginPage.clickLogin();
     }

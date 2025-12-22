@@ -23,7 +23,7 @@ public class ExpoCategoryTest extends BaseTest {
 
         driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/login");
         Thread.sleep(1000);
-        loginPage.ingresarEmail("alejandro@agraria.com");
+        loginPage.ingresarEmail("ana@agraria.com");
         loginPage.ingresarPassword("Contraseña1");
         loginPage.clickLogin();
         Thread.sleep(1000);
