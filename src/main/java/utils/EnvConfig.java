@@ -26,6 +26,7 @@ public class EnvConfig {
 
     /**
      * Obtiene la ruta del driver de Edge desde el .env
+     * 
      * @return Ruta del msedgedriver.exe
      */
     public static String getEdgeDriverPath() {
@@ -37,6 +38,7 @@ public class EnvConfig {
 
     /**
      * Obtiene la ruta donde se guardarán las capturas de pantalla
+     * 
      * @return Ruta del directorio de screenshots
      */
     public static String getScreenshotsPath() {
@@ -48,7 +50,8 @@ public class EnvConfig {
 
     /**
      * Obtiene cualquier variable del archivo .env
-     * @param key Nombre de la variable
+     * 
+     * @param key          Nombre de la variable
      * @param defaultValue Valor por defecto si no existe
      * @return Valor de la variable o el valor por defecto
      */
@@ -61,6 +64,7 @@ public class EnvConfig {
 
     /**
      * Obtiene cualquier variable del archivo .env
+     * 
      * @param key Nombre de la variable
      * @return Valor de la variable o null si no existe
      */
@@ -71,4 +75,3 @@ public class EnvConfig {
         return null;
     }
 }
-
