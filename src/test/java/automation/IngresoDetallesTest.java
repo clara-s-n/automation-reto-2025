@@ -13,7 +13,7 @@ public class IngresoDetallesTest extends BaseTest {
         Thread.sleep(2000);
 
         IngresoDetallesPage page = new IngresoDetallesPage(driver);
-        page.hacerLogin("lautaro@agraria.com", "Contraseña1");
+        page.hacerLogin("ana@agraria.com", "Contraseña1");
 
         Thread.sleep(2000);
 

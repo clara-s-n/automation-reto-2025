@@ -1,0 +1,104 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------< automation:automation >------------------------
+[INFO] Building automation 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ automation ---
+[INFO] Deleting C:\Users\Usuario\Desktop\automation-reto-2025\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ automation ---
+[INFO] skip non existing resourceDirectory C:\Users\Usuario\Desktop\automation-reto-2025\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ automation ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 17 source files with javac [debug release 25] to target\classes
+[INFO] /C:/Users/Usuario/Desktop/automation-reto-2025/src/main/java/utils/SafeClick.java: C:\Users\Usuario\Desktop\automation-reto-2025\src\main\java\utils\SafeClick.java uses or overrides a deprecated API.
+[INFO] /C:/Users/Usuario/Desktop/automation-reto-2025/src/main/java/utils/SafeClick.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ automation ---
+[INFO] skip non existing resourceDirectory C:\Users\Usuario\Desktop\automation-reto-2025\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ automation ---
+[INFO] Changes detected - recompiling the module! :dependency
+[INFO] Compiling 15 source files with javac [debug release 25] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ automation ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running automation.LoginTest
+[ERROR] Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 2.521 s <<< FAILURE! -- in automation.LoginTest
+[ERROR] automation.LoginTest.loginTest -- Time elapsed: 2.477 s <<< ERROR!
+io.github.bonigarcia.wdm.config.WebDriverManagerException: io.github.bonigarcia.wdm.config.WebDriverManagerException: java.net.UnknownHostException: msedgedriver.azureedge.net
+	at io.github.bonigarcia.wdm.WebDriverManager.handleException(WebDriverManager.java:1421)
+	at io.github.bonigarcia.wdm.WebDriverManager.manage(WebDriverManager.java:1190)
+	at io.github.bonigarcia.wdm.WebDriverManager.fallback(WebDriverManager.java:1437)
+	at io.github.bonigarcia.wdm.WebDriverManager.handleException(WebDriverManager.java:1415)
+	at io.github.bonigarcia.wdm.WebDriverManager.manage(WebDriverManager.java:1190)
+	at io.github.bonigarcia.wdm.WebDriverManager.setup(WebDriverManager.java:427)
+	at utils.DriverFactory.getDriver(DriverFactory.java:47)
+	at automation.BaseTest.setUp(BaseTest.java:24)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+Caused by: io.github.bonigarcia.wdm.config.WebDriverManagerException: java.net.UnknownHostException: msedgedriver.azureedge.net
+	at io.github.bonigarcia.wdm.WebDriverManager.getDriversFromXml(WebDriverManager.java:1588)
+	at io.github.bonigarcia.wdm.managers.EdgeDriverManager.getDriverUrls(EdgeDriverManager.java:115)
+	at io.github.bonigarcia.wdm.WebDriverManager.createUrlHandler(WebDriverManager.java:1442)
+	at io.github.bonigarcia.wdm.WebDriverManager.download(WebDriverManager.java:1268)
+	at io.github.bonigarcia.wdm.WebDriverManager.manage(WebDriverManager.java:1184)
+	... 7 more
+Caused by: java.net.UnknownHostException: msedgedriver.azureedge.net
+	at java.base/java.net.InetAddress$CachedLookup.get(InetAddress.java:909)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1702)
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1582)
+	at org.apache.hc.client5.http.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:43)
+	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:141)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:447)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:162)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:172)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:142)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:192)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:96)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:152)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:115)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:170)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
+	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
+	at io.github.bonigarcia.wdm.online.HttpClient.execute(HttpClient.java:157)
+	at io.github.bonigarcia.wdm.WebDriverManager.getDriversFromXml(WebDriverManager.java:1573)
+	... 11 more
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Errors: 
+[ERROR]   LoginTest>BaseTest.setUp:24 » WebDriverManager io.github.bonigarcia.wdm.config.WebDriverManagerException: java.net.UnknownHostException: msedgedriver.azureedge.net
+[INFO] 
+[ERROR] Tests run: 1, Failures: 0, Errors: 1, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  15.865 s
+[INFO] Finished at: 2025-12-22T11:47:27-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project automation: 
+[ERROR] 
+[ERROR] Please refer to C:\Users\Usuario\Desktop\automation-reto-2025\target\surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

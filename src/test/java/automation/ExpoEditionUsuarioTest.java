@@ -33,7 +33,7 @@ public class ExpoEditionUsuarioTest extends BaseTest {
         expoLoginPage = new ExpoLoginPage(driver);
         // Login antes de cada test
         Thread.sleep(1000);
-        expoLoginPage.ingresarEmail("alejandro@agraria.com");
+        expoLoginPage.ingresarEmail("ana@agraria.com");
         expoLoginPage.ingresarPassword("Contraseña1");
         Thread.sleep(1000);
         expoLoginPage.clickLogin();

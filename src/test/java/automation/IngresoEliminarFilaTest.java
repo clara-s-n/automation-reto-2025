@@ -12,7 +12,7 @@ public class IngresoEliminarFilaTest extends BaseTest {
         Thread.sleep(2000);
 
         IngresoEliminarFilaPage page = new IngresoEliminarFilaPage(driver);
-        page.hacerLogin("lautaro@agraria.com", "Contraseña1");
+        page.hacerLogin("ana@agraria.com", "Contraseña1");
 
         Thread.sleep(1000);
 

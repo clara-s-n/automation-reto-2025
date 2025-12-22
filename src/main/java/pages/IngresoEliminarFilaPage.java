@@ -4,13 +4,22 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.SafeClick;
+
+import java.time.Duration;
 
 public class IngresoEliminarFilaPage {
 
     private WebDriver driver;
+    private WebDriverWait wait;
+    private SafeClick safeClick;
 
     public IngresoEliminarFilaPage(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        this.safeClick = new SafeClick(driver, wait);
         PageFactory.initElements(driver, this);
     }
 
@@ -23,16 +32,16 @@ public class IngresoEliminarFilaPage {
     @FindBy(xpath = "/html/body/app-root/ion-app/ion-router-outlet/app-login/ion-content/div/ion-card/ion-card-content/form/ion-button")
     private WebElement botonLogin;
 
-    @FindBy(xpath = "/html/body/app-root/ion-app/ion-router-outlet/app-tabs/ion-tabs/div/ion-router-outlet/app-ingresos/ion-content/ion-grid/ion-row[2]/ion-col[1]/ion-card")
+    @FindBy(xpath = "//ion-card")
     private WebElement primerIngreso;
 
-    @FindBy(xpath = "/html/body/app-root/ion-app/ion-router-outlet/app-tabs/ion-tabs/div/ion-router-outlet/app-detalle-ingreso/ion-content/ion-grid/ion-row[2]/ion-col[2]/ion-card")
+    @FindBy(xpath = "(//ion-card)[1]")
     private WebElement primeraFila;
 
-    @FindBy(xpath = "/html/body/app-root/ion-app/ion-router-outlet/app-tabs/ion-tabs/div/ion-router-outlet/app-editar-fila-ingresos/ion-content/ion-fab/ion-fab-button")
+    @FindBy(xpath = "//ion-fab-button")
     private WebElement botonEliminarFila;
 
-    @FindBy(xpath = "/html/body/app-root/ion-app/ion-action-sheet/div[2]/div/div[1]/button")
+    @FindBy(xpath = "//ion-action-sheet//button[contains(.,'Eliminar') or contains(.,'eliminar') or contains(@class,'destructive')]")
     private WebElement botonEliminarFinal;
 
     public void hacerLogin(String email, String password) {
@@ -42,18 +51,59 @@ public class IngresoEliminarFilaPage {
     }
 
     public void abrirPrimerIngreso() {
-        primerIngreso.click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(
+                org.openqa.selenium.By.cssSelector("ion-card")));
+        java.util.List<WebElement> cards = driver.findElements(
+                org.openqa.selenium.By.cssSelector("ion-card"));
+        if (!cards.isEmpty()) {
+            wait.until(ExpectedConditions.elementToBeClickable(cards.get(0)));
+            safeClick.safeClick(cards.get(0));
+        }
     }
 
     public void abrirPrimeraFila() {
-        primeraFila.click();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+        }
+        wait.until(ExpectedConditions.presenceOfElementLocated(
+                org.openqa.selenium.By.cssSelector("ion-card")));
+        java.util.List<WebElement> cards = driver.findElements(
+                org.openqa.selenium.By.cssSelector("ion-card"));
+        if (!cards.isEmpty()) {
+            wait.until(ExpectedConditions.elementToBeClickable(cards.get(0)));
+            safeClick.safeClick(cards.get(0));
+        }
     }
 
     public void eliminarFila() {
-        botonEliminarFila.click();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+        }
+        // Buscar el FAB button para eliminar
+        wait.until(ExpectedConditions.presenceOfElementLocated(
+                org.openqa.selenium.By.cssSelector("ion-fab-button")));
+        WebElement fabButton = driver.findElement(
+                org.openqa.selenium.By.cssSelector("ion-fab-button"));
+        wait.until(ExpectedConditions.elementToBeClickable(fabButton));
+        safeClick.safeClick(fabButton);
     }
 
-    public void eliminarFinal(){
-        botonEliminarFinal.click();
+    public void eliminarFinal() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+        }
+        // Buscar el botón de eliminar en el action sheet
+        wait.until(ExpectedConditions.presenceOfElementLocated(
+                org.openqa.selenium.By.cssSelector("ion-action-sheet button")));
+        java.util.List<WebElement> buttons = driver.findElements(
+                org.openqa.selenium.By.cssSelector("ion-action-sheet button"));
+        // El primer botón suele ser "Eliminar"
+        if (!buttons.isEmpty()) {
+            wait.until(ExpectedConditions.elementToBeClickable(buttons.get(0)));
+            safeClick.safeClick(buttons.get(0));
+        }
     }
 }

@@ -12,7 +12,7 @@ public class EgresosCrearEmpresaTest extends BaseTest {
         Thread.sleep(1000);
 
         EgresosCrearEmpresaPage page = new EgresosCrearEmpresaPage(driver);
-        page.login("lautaro@agraria.com", "Contraseña1");
+        page.login("ana@agraria.com", "Contraseña1");
 
         Thread.sleep(1000);
 
