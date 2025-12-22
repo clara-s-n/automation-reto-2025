@@ -3,7 +3,7 @@
  * Fecha: 2025-12-17
  * Descripción: Tests de la funcionalidad ExpoAdministration, navegación entre secciones
  */
-package automation;
+package automation.funcionalidades;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -1,8 +1,9 @@
 # 📊 Reporte de Ejecución de Tests
 
-**Fecha de ejecución:** 22 de Diciembre de 2025  
+**Fecha de ejecución:** 22 de Diciembre de 2025, 14:38 hrs  
+**Branch:** Lucas_Pruebas  
 **Comando ejecutado:** `mvn clean test`  
-**Tiempo total:** 6 minutos 34 segundos  
+**Tiempo total:** 6 minutos 16 segundos  
 **Resultado:** ❌ BUILD FAILURE
 
 ---
@@ -11,11 +12,11 @@
 
 | Métrica              | Valor |
 | -------------------- | ----- |
-| **Tests ejecutados** | 25    |
+| **Tests ejecutados** | 28    |
 | **Tests pasados**    | 22 ✅ |
-| **Errores**          | 2 ❌  |
+| **Errores**          | 5 ❌  |
 | **Skipped**          | 1 ⏭️  |
-| **Tasa de éxito**    | 88%   |
+| **Tasa de éxito**    | 78.6% |
 
 ---
 
@@ -23,140 +24,243 @@
 
 | Clase de Test             | Tests         | Tiempo |
 | ------------------------- | ------------- | ------ |
-| `AppTest`                 | 1             | 0.097s |
-| `EgresosCrearEmpresaTest` | 1             | 24.49s |
-| `ExpoAdministrationTest`  | 5             | 66.20s |
-| `ExpoCategoryTest`        | 1 (1 skipped) | 12.59s |
-| `ExpoCreationUsuarioTest` | 2             | 37.82s |
-| `ExpoDeleteUsuarioTest`   | 1             | 9.28s  |
-| `ExpoEditionUsuarioTest`  | 1             | 17.13s |
-| `ExpoHomeTest`            | 5             | 52.39s |
-| `ExpoLoginTest`           | 2             | 18.40s |
-| `IngresoCrearFilaTest`    | 1             | 28.41s |
-| `IngresoDetallesTest`     | 1             | 13.61s |
-| `LoginTest`               | 1             | 17.66s |
+| `AppTest`                 | 1             | 0.029s |
+| `EgresosCrearEmpresaTest` | 1             | 22.70s |
+| `ExpoAdministrationTest`  | 6             | 65.74s |
+| `ExpoCategoryTest`        | 1 (1 skipped) | 10.28s |
+| `ExpoCreationUsuarioTest` | 2             | 34.88s |
+| `ExpoDeleteUsuarioTest`   | 1             | 8.01s  |
+| `ExpoEditionUsuarioTest`  | 1             | 14.58s |
+| `ExpoHomeTest`            | 5             | 42.73s |
+| `ExpoLoginTest`           | 2             | 15.75s |
+| `IngresoDetallesTest`     | 1             | 12.10s |
+| `LoginTest`               | 1             | 14.97s |
 
 ---
 
-## ❌ Tests Fallidos (2)
+## ❌ Tests Fallidos (5)
+
+---
 
 ### 1. EgresosEditarEmpresaTest.editarCITest
 
-**Ubicación:** `src/test/java/automation/EgresosEditarEmpresaTest.java:19`
+| Campo             | Valor                                                    |
+| ----------------- | -------------------------------------------------------- |
+| **Archivo**       | `src/test/java/automation/EgresosEditarEmpresaTest.java` |
+| **Línea**         | 19                                                       |
+| **Tipo de Error** | `TimeoutException`                                       |
+| **Tiempo**        | 41.78s                                                   |
 
-**Tipo de Error:** `TimeoutException`
-
-**Mensaje completo:**
+**Mensaje de error:**
 
 ```
 Expected condition failed: waiting for element to be clickable:
-[[ChromeDriver: chrome on windows] -> xpath: //ion-button[contains(.,'Guardar') or contains(.,'guardar')]]
+[[ChromeDriver] -> xpath: //ion-button[contains(.,'Guardar') or contains(.,'guardar')]]
 (tried for 20 second(s) with 500 milliseconds interval)
 ```
 
 **Causa raíz:**  
-El test no puede encontrar el botón "Guardar" después de intentar editar una empresa. El flujo falla en el método `editarCI()` de `EgresosEditarEmpresaPage.java` línea 158.
+El botón "Guardar" no aparece o no es clickeable después de intentar editar una empresa.
 
-**Análisis detallado:**
-
-1. El test navega a la página de empresas
-2. Selecciona la primera empresa (card)
-3. Intenta encontrar el botón de editar (con múltiples selectores)
-4. **PROBLEMA:** El botón "Guardar" con el XPath `//ion-button[contains(.,'Guardar') or contains(.,'guardar')]` no aparece o no es clickeable
-
-**Posibles causas:**
-
-- ❓ No existe ninguna empresa en la aplicación para editar
-- ❓ El formulario de edición no se abre correctamente
-- ❓ El botón tiene un texto diferente (ej: "Actualizar", "Confirmar")
-- ❓ El botón está dentro de un Shadow DOM de Ionic
-
-**Stack Trace:**
+**Stack trace relevante:**
 
 ```
 at pages.EgresosEditarEmpresaPage.editarCI(EgresosEditarEmpresaPage.java:158)
 at automation.EgresosEditarEmpresaTest.editarCITest(EgresosEditarEmpresaTest.java:19)
 ```
 
+**Posibles causas:**
+
+- No existe ninguna empresa en la aplicación para editar
+- El formulario de edición no se abre correctamente
+- El botón tiene un texto diferente (ej: "Actualizar", "Confirmar")
+
 ---
 
-### 2. IngresoEliminarFilaTest.eliminarFilaTest
+### 2. ExpoSaldoEmpresaTest.consolidacionEmpresaTest ⭐ NUEVO
 
-**Ubicación:** `src/test/java/automation/IngresoEliminarFilaTest.java:25`
+| Campo             | Valor                                                |
+| ----------------- | ---------------------------------------------------- |
+| **Archivo**       | `src/test/java/automation/ExpoSaldoEmpresaTest.java` |
+| **Línea**         | 57                                                   |
+| **Tipo de Error** | `NoSuchElementException`                             |
+| **Tiempo**        | 20.14s                                               |
 
-**Tipo de Error:** `TimeoutException`
+**Mensaje de error:**
 
-**Mensaje completo:**
+```
+no such element: Unable to locate element:
+{"method":"xpath","selector":"//ion-card[.//ion-card-title[contains(normalize-space(), 'Galpones')]]"}
+```
+
+**Causa raíz:**  
+No se encuentra la planilla llamada "Galpones" en la lista de planillas.
+
+**Stack trace relevante:**
+
+```
+at pages.ExpoSaldoEmpresaPage.cardFila(ExpoSaldoEmpresaPage.java:97)
+at pages.ExpoSaldoEmpresaPage.seleccionarPlanilla(ExpoSaldoEmpresaPage.java:119)
+at automation.ExpoSaldoEmpresaTest.consolidacionEmpresaTest(ExpoSaldoEmpresaTest.java:57)
+```
+
+**Posibles causas:**
+
+- La planilla "Galpones" no existe en la base de datos
+- El nombre de la planilla es diferente (sensible a mayúsculas/minúsculas)
+- La página no cargó completamente antes de buscar el elemento
+
+---
+
+### 3. IngresoCrearFilaTest.ingresoCrearFilaTest
+
+| Campo             | Valor                                                |
+| ----------------- | ---------------------------------------------------- |
+| **Archivo**       | `src/test/java/automation/IngresoCrearFilaTest.java` |
+| **Línea**         | 28                                                   |
+| **Tipo de Error** | `NoSuchElementException`                             |
+| **Tiempo**        | 14.83s                                               |
+
+**Mensaje de error:**
+
+```
+no such element: Unable to locate element:
+{"method":"xpath","selector":"/html/body/app-root/ion-app/ion-router-outlet/app-tabs/ion-tabs/div/ion-router-outlet/app-agregar-fila/ion-content/form/ion-item[2]/ion-input/label/div[2]/input"}
+```
+
+**Causa raíz:**  
+El XPath absoluto usado para localizar el campo de entrada es muy frágil y no encuentra el elemento.
+
+**Stack trace relevante:**
+
+```
+at pages.IngresoCrearFilaPage.completarFormulario(IngresoCrearFilaPage.java:75)
+at automation.IngresoCrearFilaTest.ingresoCrearFilaTest(IngresoCrearFilaTest.java:28)
+```
+
+**Posibles causas:**
+
+- El XPath absoluto es muy específico y cualquier cambio en la estructura del DOM lo rompe
+- La página no ha cargado completamente cuando se intenta interactuar
+- La estructura HTML de la página cambió
+
+**Recomendación:** Usar selectores más robustos:
+
+```java
+// En lugar de XPath absoluto, usar:
+@FindBy(css = "ion-input[formcontrolname='campo'] input")
+```
+
+---
+
+### 4. IngresoEliminarFilaTest.eliminarFilaTest
+
+| Campo             | Valor                                                   |
+| ----------------- | ------------------------------------------------------- |
+| **Archivo**       | `src/test/java/automation/IngresoEliminarFilaTest.java` |
+| **Línea**         | 25                                                      |
+| **Tipo de Error** | `TimeoutException`                                      |
+| **Tiempo**        | 33.21s                                                  |
+
+**Mensaje de error:**
 
 ```
 Expected condition failed: waiting for element to be clickable:
-[[ChromeDriver: chrome on windows] -> css selector: ion-card]
+[[ChromeDriver] -> css selector: ion-card]
 (tried for 20 second(s) with 500 milliseconds interval)
 ```
 
 **Causa raíz:**  
-El test no puede encontrar ningún elemento `ion-card` en la página de detalles de ingresos. El método `abrirPrimeraFila()` en `IngresoEliminarFilaPage.java` línea 74 falla al esperar por cards.
+No se encontró ningún elemento `ion-card` en la página de detalles de ingresos.
 
-**Análisis detallado:**
-
-1. El test hace login correctamente
-2. Navega a `/ingresos`
-3. Abre el primer ingreso (`abrirPrimerIngreso()`)
-4. **PROBLEMA:** Al intentar abrir la primera fila con `abrirPrimeraFila()`, no encuentra ningún `ion-card`
-
-**Posibles causas:**
-
-- ❓ No hay datos de ingresos en la aplicación
-- ❓ El ingreso seleccionado no tiene filas/detalles
-- ❓ La navegación interna no carga los datos a tiempo
-- ❓ El selector `ion-card` no es el correcto para los detalles de fila
-
-**Stack Trace:**
+**Stack trace relevante:**
 
 ```
 at pages.IngresoEliminarFilaPage.abrirPrimeraFila(IngresoEliminarFilaPage.java:74)
 at automation.IngresoEliminarFilaTest.eliminarFilaTest(IngresoEliminarFilaTest.java:25)
 ```
 
+**Posibles causas:**
+
+- No hay datos de ingresos en la aplicación
+- El ingreso seleccionado no tiene filas/detalles
+- La navegación interna no carga los datos a tiempo
+
+---
+
+### 5. TotalesTest.desgloseIngresos_Egresos_Balance_totalesTest
+
+| Campo             | Valor                                       |
+| ----------------- | ------------------------------------------- |
+| **Archivo**       | `src/test/java/automation/TotalesTest.java` |
+| **Línea**         | 30                                          |
+| **Tipo de Error** | `NumberFormatException`                     |
+| **Tiempo**        | 13.25s                                      |
+
+**Mensaje de error:**
+
+```
+java.lang.NumberFormatException: empty String
+```
+
+**Causa raíz:**  
+El método `pasarADouble()` recibe un string vacío cuando intenta parsear el balance.
+
+**Stack trace relevante:**
+
+```
+at java.base/jdk.internal.math.FloatingDecimal.readJavaFormatString(FloatingDecimal.java:1866)
+at java.base/java.lang.Double.parseDouble(Double.java:971)
+at pages.TotalesPage.pasarADouble(TotalesPage.java:60)
+at pages.TotalesPage.getBalance(TotalesPage.java:56)
+at automation.TotalesTest.desgloseIngresos_Egresos_Balance_totalesTest(TotalesTest.java:30)
+```
+
+**Posibles causas:**
+
+- El elemento que contiene el balance está vacío o no tiene texto
+- El selector del elemento de balance no encuentra el elemento correcto
+- No hay datos de ingresos/egresos para calcular el balance
+
+**Recomendación:** Agregar validación antes de parsear:
+
+```java
+public double pasarADouble(String texto) {
+    if (texto == null || texto.trim().isEmpty()) {
+        return 0.0;
+    }
+    String limpio = texto.replaceAll("[^\\d.-]", "");
+    return Double.parseDouble(limpio);
+}
+```
+
 ---
 
 ## ⏭️ Tests Skipped (1)
 
-| Test                        | Razón                                                                                     |
-| --------------------------- | ----------------------------------------------------------------------------------------- |
-| `ExpoCategoryTest` (1 de 2) | El test fue marcado como skipped (probablemente `@Ignore` o condición previa no cumplida) |
+| Test   | Clase              |
+| ------ | ------------------ |
+| 1 test | `ExpoCategoryTest` |
 
 ---
 
 ## ⚠️ Warnings Detectados
 
-### 1. Versión de CDP no soportada
+### Versión de CDP no soportada
 
 ```
 WARNING: Unable to find CDP implementation matching 143
 WARNING: Unable to find version of CDP to use for 143.0.7499.169
 ```
 
-**Impacto:** No crítico. Los tests pueden ejecutarse pero algunas funcionalidades de DevTools pueden no estar disponibles.
+**Impacto:** No crítico. Los tests pueden ejecutarse.
 
-**Solución recomendada:** Actualizar Selenium o agregar dependencia específica de CDP:
-
-```xml
-<dependency>
-    <groupId>org.seleniumhq.selenium</groupId>
-    <artifactId>selenium-devtools-v131</artifactId>
-    <version>4.27.0</version>
-</dependency>
-```
-
-### 2. Usuario no existe (Warning de test)
+### Advertencia de dependencia de datos
 
 ```
 ⚠ ADVERTENCIA: El usuario 'usuarioEditadoAutomatico' no existe.
 Este test depende de que ExpoEditionUsuarioTest se ejecute primero.
 ```
-
-**Impacto:** El test `ExpoDeleteUsuarioTest` no puede eliminar el usuario porque no existe.
 
 ---
 
@@ -173,56 +277,47 @@ Este test depende de que ExpoEditionUsuarioTest se ejecute primero.
 
 ---
 
-## 📋 Recomendaciones
+## 📋 Resumen de Problemas por Categoría
 
-### Para `EgresosEditarEmpresaTest`:
+### 🔴 Problemas de Datos (4 tests)
 
-1. **Verificar datos existentes:** Asegurarse de que existe al menos una empresa antes de ejecutar el test
-2. **Inspeccionar el DOM:** Usar DevTools para verificar el texto exacto del botón de guardar
-3. **Mejorar selectores:** Considerar usar atributos `data-testid` o `aria-label`
-4. **Agregar logs:** Añadir logging para saber en qué paso falla exactamente
+Tests que fallan porque dependen de datos que no existen:
 
-```java
-// Sugerencia de mejora
-@FindBy(css = "ion-button[type='submit'], ion-button.guardar-btn")
-private WebElement botonGuardar;
-```
+- `EgresosEditarEmpresaTest` - Necesita empresa existente
+- `ExpoSaldoEmpresaTest` - Necesita planilla "Galpones" ⭐ NUEVO
+- `IngresoEliminarFilaTest` - Necesita filas de ingreso existentes
+- `TotalesTest` - Necesita datos de ingresos/egresos
 
-### Para `IngresoEliminarFilaTest`:
+### 🔴 Problemas de Selectores (1 test)
 
-1. **Crear datos de prueba:** Ejecutar `IngresoCrearFilaTest` antes para asegurar que existen filas
-2. **Verificar navegación:** El ingreso seleccionado debe tener al menos una fila
-3. **Espera explícita mejorada:** Aumentar tiempo de espera o usar condiciones más específicas
+Tests que fallan por XPath/selectores frágiles:
 
-```java
-// Sugerencia de mejora
-wait.until(driver -> {
-    List<WebElement> cards = driver.findElements(By.cssSelector("ion-card"));
-    return !cards.isEmpty();
-});
-```
-
-### Generales:
-
-1. **Orden de ejecución:** Configurar `@FixMethodOrder` o usar TestNG para ordenar tests con dependencias
-2. **Data fixtures:** Implementar `@Before` para crear datos necesarios
-3. **Cleanup:** Implementar `@After` para limpiar datos de prueba
-4. **Screenshots en fallo:** Agregar capturas automáticas cuando falle un test
+- `IngresoCrearFilaTest` - XPath absoluto muy específico
 
 ---
 
-## 📁 Archivos de Reporte
+## 📝 Recomendaciones Generales
 
-Los reportes detallados de Surefire se encuentran en:
+1. **Orden de ejecución:** Configurar dependencias entre tests
+2. **Data fixtures:** Implementar `@Before` para crear datos necesarios
+3. **Selectores robustos:** Reemplazar XPath absolutos por selectores CSS
+4. **Validaciones:** Agregar null-checks antes de parsear datos
+5. **Esperas explícitas:** Aumentar tiempos de espera o usar condiciones más específicas
+
+---
+
+## 📁 Archivos de Reporte Detallados
 
 ```
 target/surefire-reports/
 ├── automation.EgresosEditarEmpresaTest.txt
+├── automation.ExpoSaldoEmpresaTest.txt
+├── automation.IngresoCrearFilaTest.txt
 ├── automation.IngresoEliminarFilaTest.txt
-├── TEST-automation.EgresosEditarEmpresaTest.xml
-└── TEST-automation.IngresoEliminarFilaTest.xml
+├── automation.TotalesTest.txt
+└── TEST-*.xml (reportes XML)
 ```
 
 ---
 
-_Reporte generado automáticamente el 22/12/2025_
+_Reporte generado automáticamente el 22/12/2025 14:38 hrs_

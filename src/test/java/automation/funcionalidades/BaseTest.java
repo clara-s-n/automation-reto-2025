@@ -1,4 +1,4 @@
-package automation;
+package automation.funcionalidades;
 
 import org.junit.After;
 import org.junit.Before;
@@ -9,7 +9,8 @@ import utils.utilsScreen;
 /**
  * Clase base para todos los tests
  * Utiliza DriverFactory para inicializar el WebDriver
- * El navegador se puede configurar con -Dbrowser=chrome|firefox|edge (por defecto: edge)
+ * El navegador se puede configurar con -Dbrowser=chrome|firefox|edge (por
+ * defecto: edge)
  */
 public class BaseTest {
 
