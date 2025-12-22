@@ -1,9 +1,9 @@
 # 📊 Reporte de Ejecución de Tests
 
-**Fecha de ejecución:** 22 de Diciembre de 2025, 14:23 hrs  
+**Fecha de ejecución:** 22 de Diciembre de 2025, 14:38 hrs  
 **Branch:** Lucas_Pruebas  
 **Comando ejecutado:** `mvn clean test`  
-**Tiempo total:** 6 minutos 00 segundos  
+**Tiempo total:** 6 minutos 16 segundos  
 **Resultado:** ❌ BUILD FAILURE
 
 ---
@@ -12,28 +12,29 @@
 
 | Métrica              | Valor |
 | -------------------- | ----- |
-| **Tests ejecutados** | 27    |
-| **Tests pasados**    | 21 ✅ |
+| **Tests ejecutados** | 28    |
+| **Tests pasados**    | 22 ✅ |
 | **Errores**          | 5 ❌  |
 | **Skipped**          | 1 ⏭️  |
-| **Tasa de éxito**    | 77.8% |
+| **Tasa de éxito**    | 78.6% |
 
 ---
 
-## ✅ Tests Exitosos (21)
+## ✅ Tests Exitosos (22)
 
 | Clase de Test             | Tests         | Tiempo |
 | ------------------------- | ------------- | ------ |
-| `AppTest`                 | 1             | ~0.1s  |
-| `EgresosCrearEmpresaTest` | 1             | ~24s   |
-| `ExpoAdministrationTest`  | 6             | 67.24s |
-| `ExpoCategoryTest`        | 1 (1 skipped) | 10.89s |
-| `ExpoCreationUsuarioTest` | 2             | 32.97s |
-| `ExpoDeleteUsuarioTest`   | 1             | 12.77s |
-| `ExpoHomeTest`            | 5             | 43.54s |
-| `ExpoLoginTest`           | 2             | 15.27s |
-| `IngresoDetallesTest`     | 1             | 12.13s |
-| `LoginTest`               | 1             | 15.00s |
+| `AppTest`                 | 1             | 0.029s |
+| `EgresosCrearEmpresaTest` | 1             | 22.70s |
+| `ExpoAdministrationTest`  | 6             | 65.74s |
+| `ExpoCategoryTest`        | 1 (1 skipped) | 10.28s |
+| `ExpoCreationUsuarioTest` | 2             | 34.88s |
+| `ExpoDeleteUsuarioTest`   | 1             | 8.01s  |
+| `ExpoEditionUsuarioTest`  | 1             | 14.58s |
+| `ExpoHomeTest`            | 5             | 42.73s |
+| `ExpoLoginTest`           | 2             | 15.75s |
+| `IngresoDetallesTest`     | 1             | 12.10s |
+| `LoginTest`               | 1             | 14.97s |
 
 ---
 
@@ -48,6 +49,7 @@
 | **Archivo**       | `src/test/java/automation/EgresosEditarEmpresaTest.java` |
 | **Línea**         | 19                                                       |
 | **Tipo de Error** | `TimeoutException`                                       |
+| **Tiempo**        | 41.78s                                                   |
 
 **Mensaje de error:**
 
@@ -75,37 +77,38 @@ at automation.EgresosEditarEmpresaTest.editarCITest(EgresosEditarEmpresaTest.jav
 
 ---
 
-### 2. ExpoEditionUsuarioTest.editarUsuarioTest
+### 2. ExpoSaldoEmpresaTest.consolidacionEmpresaTest ⭐ NUEVO
 
-| Campo             | Valor                                                  |
-| ----------------- | ------------------------------------------------------ |
-| **Archivo**       | `src/test/java/automation/ExpoEditionUsuarioTest.java` |
-| **Línea**         | 66                                                     |
-| **Tipo de Error** | `NoSuchElementException`                               |
+| Campo             | Valor                                                |
+| ----------------- | ---------------------------------------------------- |
+| **Archivo**       | `src/test/java/automation/ExpoSaldoEmpresaTest.java` |
+| **Línea**         | 57                                                   |
+| **Tipo de Error** | `NoSuchElementException`                             |
+| **Tiempo**        | 20.14s                                               |
 
 **Mensaje de error:**
 
 ```
 no such element: Unable to locate element:
-{"method":"xpath","selector":"//ion-card[.//ion-card-title[contains(normalize-space(), 'usuarioTestAutomatico')]]"}
+{"method":"xpath","selector":"//ion-card[.//ion-card-title[contains(normalize-space(), 'Galpones')]]"}
 ```
 
 **Causa raíz:**  
-No se encuentra el usuario "usuarioTestAutomatico" en la lista de usuarios.
+No se encuentra la planilla llamada "Galpones" en la lista de planillas.
 
 **Stack trace relevante:**
 
 ```
-at pages.ExpoUsuariosPage.tarjetaUsuario(ExpoUsuariosPage.java:102)
-at pages.ExpoUsuariosPage.clickEditar(ExpoUsuariosPage.java:108)
-at automation.ExpoEditionUsuarioTest.editarUsuarioTest(ExpoEditionUsuarioTest.java:66)
+at pages.ExpoSaldoEmpresaPage.cardFila(ExpoSaldoEmpresaPage.java:97)
+at pages.ExpoSaldoEmpresaPage.seleccionarPlanilla(ExpoSaldoEmpresaPage.java:119)
+at automation.ExpoSaldoEmpresaTest.consolidacionEmpresaTest(ExpoSaldoEmpresaTest.java:57)
 ```
 
 **Posibles causas:**
 
-- El usuario "usuarioTestAutomatico" no existe en la base de datos
-- El test de creación de usuario (`ExpoCreationUsuarioTest`) no se ejecutó antes
-- El orden de ejecución de tests no garantiza la dependencia de datos
+- La planilla "Galpones" no existe en la base de datos
+- El nombre de la planilla es diferente (sensible a mayúsculas/minúsculas)
+- La página no cargó completamente antes de buscar el elemento
 
 ---
 
@@ -116,6 +119,7 @@ at automation.ExpoEditionUsuarioTest.editarUsuarioTest(ExpoEditionUsuarioTest.ja
 | **Archivo**       | `src/test/java/automation/IngresoCrearFilaTest.java` |
 | **Línea**         | 28                                                   |
 | **Tipo de Error** | `NoSuchElementException`                             |
+| **Tiempo**        | 14.83s                                               |
 
 **Mensaje de error:**
 
@@ -140,13 +144,11 @@ at automation.IngresoCrearFilaTest.ingresoCrearFilaTest(IngresoCrearFilaTest.jav
 - La página no ha cargado completamente cuando se intenta interactuar
 - La estructura HTML de la página cambió
 
-**Recomendación:** Usar selectores más robustos como CSS o XPath relativos:
+**Recomendación:** Usar selectores más robustos:
 
 ```java
 // En lugar de XPath absoluto, usar:
 @FindBy(css = "ion-input[formcontrolname='campo'] input")
-// o
-@FindBy(xpath = "//ion-input[@formcontrolname='campo']//input")
 ```
 
 ---
@@ -158,6 +160,7 @@ at automation.IngresoCrearFilaTest.ingresoCrearFilaTest(IngresoCrearFilaTest.jav
 | **Archivo**       | `src/test/java/automation/IngresoEliminarFilaTest.java` |
 | **Línea**         | 25                                                      |
 | **Tipo de Error** | `TimeoutException`                                      |
+| **Tiempo**        | 33.21s                                                  |
 
 **Mensaje de error:**
 
@@ -192,6 +195,7 @@ at automation.IngresoEliminarFilaTest.eliminarFilaTest(IngresoEliminarFilaTest.j
 | **Archivo**       | `src/test/java/automation/TotalesTest.java` |
 | **Línea**         | 30                                          |
 | **Tipo de Error** | `NumberFormatException`                     |
+| **Tiempo**        | 13.25s                                      |
 
 **Mensaje de error:**
 
@@ -223,9 +227,8 @@ at automation.TotalesTest.desgloseIngresos_Egresos_Balance_totalesTest(TotalesTe
 ```java
 public double pasarADouble(String texto) {
     if (texto == null || texto.trim().isEmpty()) {
-        return 0.0; // o lanzar excepción con mensaje descriptivo
+        return 0.0;
     }
-    // remover caracteres no numéricos excepto punto y menos
     String limpio = texto.replaceAll("[^\\d.-]", "");
     return Double.parseDouble(limpio);
 }
@@ -250,7 +253,14 @@ WARNING: Unable to find CDP implementation matching 143
 WARNING: Unable to find version of CDP to use for 143.0.7499.169
 ```
 
-**Impacto:** No crítico. Los tests pueden ejecutarse pero algunas funcionalidades de DevTools pueden no estar disponibles.
+**Impacto:** No crítico. Los tests pueden ejecutarse.
+
+### Advertencia de dependencia de datos
+
+```
+⚠ ADVERTENCIA: El usuario 'usuarioEditadoAutomatico' no existe.
+Este test depende de que ExpoEditionUsuarioTest se ejecute primero.
+```
 
 ---
 
@@ -269,13 +279,14 @@ WARNING: Unable to find version of CDP to use for 143.0.7499.169
 
 ## 📋 Resumen de Problemas por Categoría
 
-### 🔴 Problemas de Datos (3 tests)
+### 🔴 Problemas de Datos (4 tests)
 
 Tests que fallan porque dependen de datos que no existen:
 
 - `EgresosEditarEmpresaTest` - Necesita empresa existente
-- `ExpoEditionUsuarioTest` - Necesita usuario "usuarioTestAutomatico"
+- `ExpoSaldoEmpresaTest` - Necesita planilla "Galpones" ⭐ NUEVO
 - `IngresoEliminarFilaTest` - Necesita filas de ingreso existentes
+- `TotalesTest` - Necesita datos de ingresos/egresos
 
 ### 🔴 Problemas de Selectores (1 test)
 
@@ -283,21 +294,15 @@ Tests que fallan por XPath/selectores frágiles:
 
 - `IngresoCrearFilaTest` - XPath absoluto muy específico
 
-### 🔴 Problemas de Validación (1 test)
-
-Tests que fallan por falta de validación de datos:
-
-- `TotalesTest` - No maneja strings vacíos al parsear números
-
 ---
 
 ## 📝 Recomendaciones Generales
 
-1. **Orden de ejecución:** Configurar dependencias entre tests o usar `@FixMethodOrder`
+1. **Orden de ejecución:** Configurar dependencias entre tests
 2. **Data fixtures:** Implementar `@Before` para crear datos necesarios
-3. **Selectores robustos:** Reemplazar XPath absolutos por selectores CSS o XPath relativos
-4. **Validaciones:** Agregar null-checks y validaciones antes de parsear datos
-5. **Cleanup:** Implementar `@After` para limpiar datos de prueba
+3. **Selectores robustos:** Reemplazar XPath absolutos por selectores CSS
+4. **Validaciones:** Agregar null-checks antes de parsear datos
+5. **Esperas explícitas:** Aumentar tiempos de espera o usar condiciones más específicas
 
 ---
 
@@ -306,7 +311,7 @@ Tests que fallan por falta de validación de datos:
 ```
 target/surefire-reports/
 ├── automation.EgresosEditarEmpresaTest.txt
-├── automation.ExpoEditionUsuarioTest.txt
+├── automation.ExpoSaldoEmpresaTest.txt
 ├── automation.IngresoCrearFilaTest.txt
 ├── automation.IngresoEliminarFilaTest.txt
 ├── automation.TotalesTest.txt
@@ -315,4 +320,4 @@ target/surefire-reports/
 
 ---
 
-_Reporte generado automáticamente el 22/12/2025 14:23 hrs_
+_Reporte generado automáticamente el 22/12/2025 14:38 hrs_
