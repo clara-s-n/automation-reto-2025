@@ -23,12 +23,13 @@ public class DriverFactory {
 
     /**
      * Obtiene una instancia de WebDriver según el navegador especificado
+     * 
      * @param browser Nombre del navegador ("edge", "chrome", "firefox")
      * @return Instancia de WebDriver configurada
      */
     public static WebDriver getDriver(String browser) {
         WebDriver driver;
-        
+
         String browserType = browser == null ? "edge" : browser.toLowerCase();
 
         switch (browserType) {
@@ -52,7 +53,7 @@ public class DriverFactory {
         chromeOptions.addArguments("--remote-allow-origins=*");
         chromeOptions.addArguments("--no-sandbox");
         chromeOptions.addArguments("--disable-dev-shm-usage");
-        
+
         try {
             WebDriverManager.chromedriver().setup();
             return new ChromeDriver(chromeOptions);
@@ -74,7 +75,7 @@ public class DriverFactory {
         FirefoxOptions firefoxOptions = new FirefoxOptions();
         firefoxOptions.addArguments("--no-sandbox");
         firefoxOptions.addArguments("--disable-dev-shm-usage");
-        
+
         try {
             WebDriverManager.firefoxdriver().setup();
             return new FirefoxDriver(firefoxOptions);
@@ -97,7 +98,7 @@ public class DriverFactory {
         edgeOptions.addArguments("--remote-allow-origins=*");
         edgeOptions.addArguments("--no-sandbox");
         edgeOptions.addArguments("--disable-dev-shm-usage");
-        
+
         try {
             WebDriverManager.edgedriver().setup();
             return new EdgeDriver(edgeOptions);
@@ -118,6 +119,7 @@ public class DriverFactory {
     /**
      * Obtiene el navegador configurado desde las propiedades del sistema
      * Si no está configurado, retorna "chrome" por defecto
+     * 
      * @return Nombre del navegador configurado
      */
     public static String getConfiguredBrowser() {
