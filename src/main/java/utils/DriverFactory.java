@@ -18,8 +18,17 @@ import java.io.File;
  * Utiliza WebDriverManager para gestionar automáticamente los drivers
  * Si falla, usa la ruta del driver desde EnvConfig como fallback
  * Soporta múltiples navegadores: edge, chrome, firefox
+ * Soporta modo headless con -Dheadless=true
  */
 public class DriverFactory {
+
+    /**
+     * Verifica si el modo headless está habilitado
+     * @return true si -Dheadless=true está configurado
+     */
+    public static boolean isHeadless() {
+        return Boolean.parseBoolean(System.getProperty("headless", "false"));
+    }
 
     /**
      * Obtiene una instancia de WebDriver según el navegador especificado
@@ -53,6 +62,14 @@ public class DriverFactory {
         chromeOptions.addArguments("--remote-allow-origins=*");
         chromeOptions.addArguments("--no-sandbox");
         chromeOptions.addArguments("--disable-dev-shm-usage");
+        
+        // Modo headless si está configurado
+        if (isHeadless()) {
+            chromeOptions.addArguments("--headless=new");
+            chromeOptions.addArguments("--window-size=1920,1080");
+            chromeOptions.addArguments("--disable-gpu");
+            System.out.println("Chrome ejecutándose en modo HEADLESS");
+        }
 
         try {
             WebDriverManager.chromedriver().setup();
@@ -75,6 +92,14 @@ public class DriverFactory {
         FirefoxOptions firefoxOptions = new FirefoxOptions();
         firefoxOptions.addArguments("--no-sandbox");
         firefoxOptions.addArguments("--disable-dev-shm-usage");
+        
+        // Modo headless si está configurado
+        if (isHeadless()) {
+            firefoxOptions.addArguments("-headless");
+            firefoxOptions.addArguments("--width=1920");
+            firefoxOptions.addArguments("--height=1080");
+            System.out.println("Firefox ejecutándose en modo HEADLESS");
+        }
 
         try {
             WebDriverManager.firefoxdriver().setup();
@@ -98,6 +123,14 @@ public class DriverFactory {
         edgeOptions.addArguments("--remote-allow-origins=*");
         edgeOptions.addArguments("--no-sandbox");
         edgeOptions.addArguments("--disable-dev-shm-usage");
+        
+        // Modo headless si está configurado
+        if (isHeadless()) {
+            edgeOptions.addArguments("--headless=new");
+            edgeOptions.addArguments("--window-size=1920,1080");
+            edgeOptions.addArguments("--disable-gpu");
+            System.out.println("Edge ejecutándose en modo HEADLESS");
+        }
 
         try {
             WebDriverManager.edgedriver().setup();
