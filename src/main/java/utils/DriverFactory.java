@@ -24,6 +24,7 @@ public class DriverFactory {
 
     /**
      * Verifica si el modo headless está habilitado
+     * 
      * @return true si -Dheadless=true está configurado
      */
     public static boolean isHeadless() {
@@ -62,7 +63,7 @@ public class DriverFactory {
         chromeOptions.addArguments("--remote-allow-origins=*");
         chromeOptions.addArguments("--no-sandbox");
         chromeOptions.addArguments("--disable-dev-shm-usage");
-        
+
         // Modo headless si está configurado
         if (isHeadless()) {
             chromeOptions.addArguments("--headless=new");
@@ -92,7 +93,7 @@ public class DriverFactory {
         FirefoxOptions firefoxOptions = new FirefoxOptions();
         firefoxOptions.addArguments("--no-sandbox");
         firefoxOptions.addArguments("--disable-dev-shm-usage");
-        
+
         // Modo headless si está configurado
         if (isHeadless()) {
             firefoxOptions.addArguments("-headless");
@@ -123,7 +124,7 @@ public class DriverFactory {
         edgeOptions.addArguments("--remote-allow-origins=*");
         edgeOptions.addArguments("--no-sandbox");
         edgeOptions.addArguments("--disable-dev-shm-usage");
-        
+
         // Modo headless si está configurado
         if (isHeadless()) {
             edgeOptions.addArguments("--headless=new");
