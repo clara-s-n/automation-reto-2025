@@ -14,6 +14,7 @@
 package automation.flujoscriticos;
 
 import org.junit.Test;
+import org.junit.Before;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -25,15 +26,17 @@ public class F8_GestionUsuariosAdminTest extends BaseTestFlujos {
   private static final String USUARIOS_URL = BASE_URL + "/usuarios";
   private static final String ADMIN_URL = BASE_URL + "/administracion";
 
+  @Before
+  public void setUpTest() {
+    setupTestEnvironment();
+  }
+
   /**
    * Test para verificar navegación a sección de usuarios
    */
   @Test
   public void navegacionSeccionUsuarios() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       driver.get(ADMIN_URL);
       waitForPageLoad();
 
@@ -70,9 +73,6 @@ public class F8_GestionUsuariosAdminTest extends BaseTestFlujos {
   @Test
   public void verificarListadoUsuarios() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       driver.get(ADMIN_URL);
       waitForPageLoad();
 
@@ -113,9 +113,6 @@ public class F8_GestionUsuariosAdminTest extends BaseTestFlujos {
   @Test
   public void verificarBotonCrearUsuario() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       driver.get(ADMIN_URL);
       waitForPageLoad();
 
@@ -152,9 +149,6 @@ public class F8_GestionUsuariosAdminTest extends BaseTestFlujos {
   @Test
   public void verificarFormularioCreacionUsuario() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       driver.get(ADMIN_URL);
       waitForPageLoad();
 
@@ -215,9 +209,6 @@ public class F8_GestionUsuariosAdminTest extends BaseTestFlujos {
   @Test
   public void verificarOpcionRolAdmin() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       driver.get(ADMIN_URL);
       waitForPageLoad();
 
@@ -265,9 +256,6 @@ public class F8_GestionUsuariosAdminTest extends BaseTestFlujos {
   @Test
   public void verificarOpcionesEdicionUsuario() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       driver.get(ADMIN_URL);
       waitForPageLoad();
 
@@ -308,9 +296,6 @@ public class F8_GestionUsuariosAdminTest extends BaseTestFlujos {
   @Test
   public void verificarOpcionesEliminacionUsuario() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       driver.get(ADMIN_URL);
       waitForPageLoad();
 
@@ -347,9 +332,6 @@ public class F8_GestionUsuariosAdminTest extends BaseTestFlujos {
   @Test
   public void verificarInformacionUsuariosLista() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       driver.get(ADMIN_URL);
       waitForPageLoad();
 
@@ -390,9 +372,6 @@ public class F8_GestionUsuariosAdminTest extends BaseTestFlujos {
   @Test
   public void adminPuedeVerTodosUsuarios() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       driver.get(ADMIN_URL);
       waitForPageLoad();
 

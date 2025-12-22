@@ -12,6 +12,7 @@
 package automation.flujoscriticos;
 
 import org.junit.Test;
+import org.junit.Before;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -19,15 +20,17 @@ import java.util.List;
 
 public class F11_RegistroPagosMultiplesTest extends BaseTestFlujos {
 
+  @Before
+  public void setUpTest() {
+    setupTestEnvironment();
+  }
+
   /**
    * Test para verificar estructura de filas con pagos
    */
   @Test
   public void verificarEstructuraFilasPagos() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       navigateToIngresos();
       waitForPageLoad();
 
@@ -65,9 +68,6 @@ public class F11_RegistroPagosMultiplesTest extends BaseTestFlujos {
   @Test
   public void verificarSaldoPendiente() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       navigateToIngresos();
       waitForPageLoad();
 
@@ -104,9 +104,6 @@ public class F11_RegistroPagosMultiplesTest extends BaseTestFlujos {
   @Test
   public void verificarCampoPagoInicial() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       navigateToIngresos();
       waitForPageLoad();
 
@@ -143,9 +140,6 @@ public class F11_RegistroPagosMultiplesTest extends BaseTestFlujos {
   @Test
   public void verificarCalculoSaldo() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       navigateToIngresos();
       waitForPageLoad();
 
@@ -185,9 +179,6 @@ public class F11_RegistroPagosMultiplesTest extends BaseTestFlujos {
   @Test
   public void verificarBotonAgregarPago() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       navigateToIngresos();
       waitForPageLoad();
 
@@ -223,9 +214,6 @@ public class F11_RegistroPagosMultiplesTest extends BaseTestFlujos {
   @Test
   public void verificarEstadoFilasSegunSaldo() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       navigateToIngresos();
       waitForPageLoad();
 
@@ -262,9 +250,6 @@ public class F11_RegistroPagosMultiplesTest extends BaseTestFlujos {
   @Test
   public void verificarEstructuraPagosEgresos() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       navigateToEgresos();
       waitForPageLoad();
 

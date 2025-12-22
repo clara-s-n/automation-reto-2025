@@ -9,6 +9,9 @@
  * - Restricción de acceso usuario normal
  * - Acceso completo de admin
  * - Sesión persistente
+ * 
+ * NOTA: Este test NO usa @Before con setupTestEnvironment() porque
+ * prueba específicamente la funcionalidad de autenticación.
  */
 package automation.flujoscriticos;
 

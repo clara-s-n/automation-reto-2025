@@ -11,6 +11,7 @@
 package automation.flujoscriticos;
 
 import org.junit.Test;
+import org.junit.Before;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -18,15 +19,17 @@ import java.util.List;
 
 public class F12_ExportacionInformesTest extends BaseTestFlujos {
 
+  @Before
+  public void setUpTest() {
+    setupTestEnvironment();
+  }
+
   /**
    * Test para verificar opciones de exportación en Ingresos
    */
   @Test
   public void verificarExportacionIngresos() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       navigateToIngresos();
       waitForPageLoad();
 
@@ -65,9 +68,6 @@ public class F12_ExportacionInformesTest extends BaseTestFlujos {
   @Test
   public void verificarExportacionEgresos() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       navigateToEgresos();
       waitForPageLoad();
 
@@ -94,9 +94,6 @@ public class F12_ExportacionInformesTest extends BaseTestFlujos {
   @Test
   public void verificarSeccionInformes() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       // Buscar enlace a informes en menú
       boolean tieneMenuInformes = isElementPresent(
           By.xpath("//*[contains(text(),'Informe') or contains(text(),'Reporte')]")) ||
@@ -128,9 +125,6 @@ public class F12_ExportacionInformesTest extends BaseTestFlujos {
   @Test
   public void verificarTotalesComoInforme() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       navigateToTotales();
       waitForPageLoad();
 
@@ -157,9 +151,6 @@ public class F12_ExportacionInformesTest extends BaseTestFlujos {
   @Test
   public void verificarFuncionalidadImpresion() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       navigateToTotales();
       waitForPageLoad();
 
@@ -187,9 +178,6 @@ public class F12_ExportacionInformesTest extends BaseTestFlujos {
   @Test
   public void verificarDatosExportablesEmpresas() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       navigateToEmpresas();
       waitForPageLoad();
 
@@ -216,9 +204,6 @@ public class F12_ExportacionInformesTest extends BaseTestFlujos {
   @Test
   public void verificarPresentacionTabular() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       navigateToIngresos();
       waitForPageLoad();
 
@@ -253,9 +238,6 @@ public class F12_ExportacionInformesTest extends BaseTestFlujos {
   @Test
   public void verificarResumenGlobal() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       navigateToTotales();
       waitForPageLoad();
 

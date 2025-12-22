@@ -12,6 +12,7 @@
 package automation.flujoscriticos;
 
 import org.junit.Test;
+import org.junit.Before;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -20,8 +21,12 @@ import java.time.Year;
 
 public class F6_GestionAniosFiscalesTest extends BaseTestFlujos {
 
-  private static final String ANIOS_URL = BASE_URL + "/anio";
   private static final String ADMIN_URL = BASE_URL + "/administracion";
+
+  @Before
+  public void setUpTest() {
+    setupTestEnvironment();
+  }
 
   /**
    * Test para verificar navegación a sección de años
@@ -29,9 +34,6 @@ public class F6_GestionAniosFiscalesTest extends BaseTestFlujos {
   @Test
   public void navegacionSeccionAnios() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       // Navegar a administración
       driver.get(ADMIN_URL);
       waitForPageLoad();
@@ -70,9 +72,6 @@ public class F6_GestionAniosFiscalesTest extends BaseTestFlujos {
   @Test
   public void verificarListadoAnios() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       // Ir a administración
       driver.get(ADMIN_URL);
       waitForPageLoad();
@@ -106,9 +105,6 @@ public class F6_GestionAniosFiscalesTest extends BaseTestFlujos {
   @Test
   public void verificarBotonCrearAnio() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       driver.get(ADMIN_URL);
       waitForPageLoad();
 
@@ -142,9 +138,6 @@ public class F6_GestionAniosFiscalesTest extends BaseTestFlujos {
   @Test
   public void verificarSelectorAnioActivo() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       // Navegar a ingresos donde debería mostrarse el año activo
       navigateToIngresos();
       waitForPageLoad();
@@ -181,9 +174,6 @@ public class F6_GestionAniosFiscalesTest extends BaseTestFlujos {
   @Test
   public void verificarCambioContextoAnio() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       navigateToIngresos();
       waitForPageLoad();
 
@@ -223,9 +213,6 @@ public class F6_GestionAniosFiscalesTest extends BaseTestFlujos {
   @Test
   public void verificarDatosPorAnio() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       navigateToIngresos();
       waitForPageLoad();
 
@@ -256,9 +243,6 @@ public class F6_GestionAniosFiscalesTest extends BaseTestFlujos {
   @Test
   public void verificarPersistenciaAnioSeleccionado() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       // Navegar a ingresos
       navigateToIngresos();
       waitForPageLoad();

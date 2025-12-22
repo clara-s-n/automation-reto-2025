@@ -13,6 +13,7 @@
 package automation.flujoscriticos;
 
 import org.junit.Test;
+import org.junit.Before;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -22,15 +23,17 @@ public class F9_GestionCategoriasTest extends BaseTestFlujos {
 
   private static final String CATEGORIAS_URL = BASE_URL + "/categorias";
 
+  @Before
+  public void setUpTest() {
+    setupTestEnvironment();
+  }
+
   /**
    * Test para verificar navegación a sección de categorías
    */
   @Test
   public void navegacionSeccionCategorias() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       // Navegar a administración
       driver.get(ADMIN_URL);
       waitForPageLoad();
@@ -69,9 +72,6 @@ public class F9_GestionCategoriasTest extends BaseTestFlujos {
   @Test
   public void verificarListadoCategorias() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       driver.get(ADMIN_URL);
       waitForPageLoad();
 
@@ -111,9 +111,6 @@ public class F9_GestionCategoriasTest extends BaseTestFlujos {
   @Test
   public void verificarBotonCrearCategoria() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       driver.get(ADMIN_URL);
       waitForPageLoad();
 
@@ -154,9 +151,6 @@ public class F9_GestionCategoriasTest extends BaseTestFlujos {
   @Test
   public void verificarInformacionCategorias() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       driver.get(ADMIN_URL);
       waitForPageLoad();
 
@@ -201,9 +195,6 @@ public class F9_GestionCategoriasTest extends BaseTestFlujos {
   @Test
   public void verificarOpcionesEdicionCategoria() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       driver.get(ADMIN_URL);
       waitForPageLoad();
 
@@ -239,9 +230,6 @@ public class F9_GestionCategoriasTest extends BaseTestFlujos {
   @Test
   public void verificarOpcionesEliminacionCategoria() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       driver.get(ADMIN_URL);
       waitForPageLoad();
 
@@ -278,9 +266,6 @@ public class F9_GestionCategoriasTest extends BaseTestFlujos {
   @Test
   public void verificarRelacionCategoriasEgresos() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       // Ir a egresos
       navigateToEgresos();
       waitForPageLoad();

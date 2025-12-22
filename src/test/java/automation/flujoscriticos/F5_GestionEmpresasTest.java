@@ -12,6 +12,7 @@
 package automation.flujoscriticos;
 
 import org.junit.Test;
+import org.junit.Before;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -23,15 +24,17 @@ public class F5_GestionEmpresasTest extends BaseTestFlujos {
   private static final String EMPRESAS_URL = BASE_URL + "/empresas";
   private static final String ADMIN_EGRESOS_URL = BASE_URL + "/egresos";
 
+  @Before
+  public void setUpTest() {
+    setupTestEnvironment();
+  }
+
   /**
    * Test para verificar navegación a sección de empresas
    */
   @Test
   public void navegacionSeccionEmpresas() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       // Navegar a empresas
       driver.get(EMPRESAS_URL);
       waitForPageLoad();
@@ -58,9 +61,6 @@ public class F5_GestionEmpresasTest extends BaseTestFlujos {
   @Test
   public void verificarListadoEmpresas() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       driver.get(EMPRESAS_URL);
       waitForPageLoad();
 
@@ -91,9 +91,6 @@ public class F5_GestionEmpresasTest extends BaseTestFlujos {
   @Test
   public void verificarBotonCrearEmpresa() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       // Primero ir a egresos donde se crean empresas
       driver.get(ADMIN_EGRESOS_URL);
       waitForPageLoad();
@@ -129,9 +126,6 @@ public class F5_GestionEmpresasTest extends BaseTestFlujos {
   @Test
   public void verificarInformacionEmpresa() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       driver.get(EMPRESAS_URL);
       waitForPageLoad();
 
@@ -171,9 +165,6 @@ public class F5_GestionEmpresasTest extends BaseTestFlujos {
   @Test
   public void verificarNombresEmpresas() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       driver.get(EMPRESAS_URL);
       waitForPageLoad();
 
@@ -212,9 +203,6 @@ public class F5_GestionEmpresasTest extends BaseTestFlujos {
   @Test
   public void verificarAccesoEdicionEmpresa() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       driver.get(EMPRESAS_URL);
       waitForPageLoad();
 
@@ -254,9 +242,6 @@ public class F5_GestionEmpresasTest extends BaseTestFlujos {
   @Test
   public void verificarAccesoAdminEmpresas() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       // Admin debe poder acceder a empresas
       driver.get(EMPRESAS_URL);
       waitForPageLoad();

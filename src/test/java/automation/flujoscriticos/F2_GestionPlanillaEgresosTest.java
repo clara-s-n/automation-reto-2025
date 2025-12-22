@@ -26,7 +26,7 @@ public class F2_GestionPlanillaEgresosTest extends BaseTestFlujos {
 
   @Before
   public void setUpTest() {
-    loginAsAdmin();
+    setupTestEnvironment();
   }
 
   /**

@@ -13,6 +13,7 @@
 package automation.flujoscriticos;
 
 import org.junit.Test;
+import org.junit.Before;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -20,15 +21,17 @@ import java.util.List;
 
 public class F10_GeneracionTotalesTest extends BaseTestFlujos {
 
+  @Before
+  public void setUpTest() {
+    setupTestEnvironment();
+  }
+
   /**
    * Test para verificar navegación a sección de totales
    */
   @Test
   public void navegacionSeccionTotales() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       navigateToTotales();
       waitForPageLoad();
 
@@ -54,9 +57,6 @@ public class F10_GeneracionTotalesTest extends BaseTestFlujos {
   @Test
   public void verificarTotalIngresos() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       navigateToTotales();
       waitForPageLoad();
 
@@ -89,9 +89,6 @@ public class F10_GeneracionTotalesTest extends BaseTestFlujos {
   @Test
   public void verificarTotalEgresos() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       navigateToTotales();
       waitForPageLoad();
 
@@ -117,9 +114,6 @@ public class F10_GeneracionTotalesTest extends BaseTestFlujos {
   @Test
   public void verificarBalanceGeneral() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       navigateToTotales();
       waitForPageLoad();
 
@@ -146,9 +140,6 @@ public class F10_GeneracionTotalesTest extends BaseTestFlujos {
   @Test
   public void verificarEstructuraPaginaTotales() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       navigateToTotales();
       waitForPageLoad();
 
@@ -179,9 +170,6 @@ public class F10_GeneracionTotalesTest extends BaseTestFlujos {
   @Test
   public void verificarValoresNumericos() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       navigateToTotales();
       waitForPageLoad();
 
@@ -219,9 +207,6 @@ public class F10_GeneracionTotalesTest extends BaseTestFlujos {
   @Test
   public void verificarConsistenciaTotalesIngresos() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       // Primero ver ingresos
       navigateToIngresos();
       waitForPageLoad();
@@ -250,9 +235,6 @@ public class F10_GeneracionTotalesTest extends BaseTestFlujos {
   @Test
   public void verificarConsistenciaTotalesEgresos() {
     try {
-      loginAsAdmin();
-      waitForPageLoad();
-
       // Primero ver egresos
       navigateToEgresos();
       waitForPageLoad();

@@ -22,7 +22,7 @@ public class F3_CalculosAutomaticosTest extends BaseTestFlujos {
 
   @Before
   public void setUpTest() {
-    loginAsAdmin();
+    setupTestEnvironment();
   }
 
   /**

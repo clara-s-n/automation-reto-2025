@@ -22,7 +22,7 @@ public class F4_SaldoEmpresaConsolidacionTest extends BaseTestFlujos {
 
   @Before
   public void setUpTest() {
-    loginAsAdmin();
+    setupTestEnvironment();
   }
 
   /**
