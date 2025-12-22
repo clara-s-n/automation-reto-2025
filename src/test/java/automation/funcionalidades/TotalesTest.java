@@ -1,4 +1,4 @@
-package automation;
+package automation.funcionalidades;
 
 import org.junit.Test;
 import pages.*;
@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 public class TotalesTest extends BaseTest {
 
     @Test
-    public void desgloseIngresos_Egresos_Balance_totalesTest() throws InterruptedException{
+    public void desgloseIngresos_Egresos_Balance_totalesTest() throws InterruptedException {
 
         driver.navigate().to("https://reto2025.brazilsouth.cloudapp.azure.com/login");
         Thread.sleep(2000);

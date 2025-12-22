@@ -1,4 +1,4 @@
-package automation;
+package automation.funcionalidades;
 
 import org.junit.Before;
 import org.junit.Test;

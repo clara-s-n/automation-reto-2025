@@ -3,7 +3,7 @@
  * Fecha: 2025-12-22
  * Descripción: Test del flujo Saldo por Empresa - Consolidación
  */
-package automation;
+package automation.funcionalidades;
 
 import org.junit.Before;
 import org.junit.Test;

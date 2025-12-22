@@ -3,7 +3,7 @@
  * Fecha: 2025-12-16
  * Descripción: Test de la funcionalidad ExpoHome, navegación entre pestañas principales
  */
-package automation;
+package automation.funcionalidades;
 
 import org.junit.Before;
 import org.junit.Test;
