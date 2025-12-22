@@ -26,7 +26,7 @@ public class ExpoDeleteUsuarioTest extends BaseTest {
 
         driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/login");
         Thread.sleep(1000);
-        expoLoginPage.ingresarEmail("alejandro@agraria.com");
+        expoLoginPage.ingresarEmail("ana@agraria.com");
         expoLoginPage.ingresarPassword("Contraseña1");
         expoLoginPage.clickLogin();
         Thread.sleep(1000);

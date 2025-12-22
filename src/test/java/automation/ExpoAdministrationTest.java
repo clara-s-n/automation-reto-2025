@@ -30,7 +30,7 @@ public class ExpoAdministrationTest extends BaseTest {
         driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/login");
         expoLoginPage = new ExpoLoginPage(driver);
         // Login antes de cada test
-        expoLoginPage.ingresarEmail("alejandro@agraria.com");
+        expoLoginPage.ingresarEmail("ana@agraria.com");
         expoLoginPage.ingresarPassword("Contraseña1");
         expoLoginPage.clickLogin();
         driver.get("https://reto2025.brazilsouth.cloudapp.azure.com/administracion");
@@ -102,5 +102,14 @@ public class ExpoAdministrationTest extends BaseTest {
         boolean visible = driver.findElements(By.xpath("//ion-title[contains(text(),'Planillas')]")).size() > 0;
         Assert.assertTrue("No se cargó la sección Planillas de ingreso", visible);
         utilsScreen.takeScreenshot(driver, "AdministrationTest_planillas");
+    }
+
+    @Test
+    public void navegarAAboutUs() throws Exception {
+        Thread.sleep(2000);
+        administrationPage.clickAboutUs();
+        Thread.sleep(2000);
+        boolean visible = driver.findElements(By.xpath("//ion-title[contains(text(),'Acerca de')]")).size() > 0;
+        Assert.assertTrue("No se cargó la sección Acerca de", visible);
     }
 }
