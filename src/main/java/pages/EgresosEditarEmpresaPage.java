@@ -109,8 +109,42 @@ public class EgresosEditarEmpresaPage {
         }
 
         Thread.sleep(1000);
-        wait.until(ExpectedConditions.elementToBeClickable(botonGuardar));
-        js.executeScript("arguments[0].click();", botonGuardar);
+        // Buscar botón guardar con múltiples selectores
+        WebElement guardarBtn = findGuardarButton();
+        js.executeScript("arguments[0].scrollIntoView({block: 'center'});", guardarBtn);
+        Thread.sleep(300);
+        js.executeScript("arguments[0].click();", guardarBtn);
+    }
+
+    private WebElement findGuardarButton() {
+        String[] guardarSelectors = {
+                "//ion-button[contains(translate(., 'GUARDAR', 'guardar'), 'guardar')]",
+                "//ion-button[@type='submit']",
+                "//ion-button[contains(@color, 'primary')]",
+                "//button[contains(translate(., 'GUARDAR', 'guardar'), 'guardar')]"
+        };
+        for (String selector : guardarSelectors) {
+            try {
+                java.util.List<WebElement> buttons = driver.findElements(
+                        org.openqa.selenium.By.xpath(selector));
+                if (!buttons.isEmpty()) {
+                    for (WebElement btn : buttons) {
+                        if (btn.isDisplayed()) {
+                            return btn;
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                continue;
+            }
+        }
+        // Fallback a CSS
+        try {
+            return driver.findElement(org.openqa.selenium.By.cssSelector(
+                    "ion-button[type='submit'], ion-footer ion-button, form ion-button"));
+        } catch (Exception e) {
+            throw new RuntimeException("No se encontró botón Guardar");
+        }
     }
 
     private WebElement findEditButton(org.openqa.selenium.JavascriptExecutor js) {
@@ -249,7 +283,10 @@ public class EgresosEditarEmpresaPage {
         }
 
         Thread.sleep(1000);
-        wait.until(ExpectedConditions.elementToBeClickable(botonGuardar));
-        js.executeScript("arguments[0].click();", botonGuardar);
+        // Buscar botón guardar con múltiples selectores
+        WebElement guardarBtn = findGuardarButton();
+        js.executeScript("arguments[0].scrollIntoView({block: 'center'});", guardarBtn);
+        Thread.sleep(300);
+        js.executeScript("arguments[0].click();", guardarBtn);
     }
 }

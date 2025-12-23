@@ -35,28 +35,45 @@ public class TotalesPage {
     @FindBy(xpath = "//*[normalize-space()='BALANCE GENERAL']/following::strong[1]")
     private WebElement balance;
 
-
     public void clickTotalesTab() {
         wait.until(ExpectedConditions.elementToBeClickable(tabTotales));
         safeClick.safeClick(tabTotales);
     }
 
-    public void clickDesgloseIngresos(){
+    public void clickDesgloseIngresos() {
         wait.until(ExpectedConditions.visibilityOf(verIngresos));
         safeClick.safeClick(verIngresos);
     }
 
-
-    public void clickDesgloseEgresos(){
+    public void clickDesgloseEgresos() {
         wait.until(ExpectedConditions.visibilityOf(verEgresos));
         safeClick.safeClick(verEgresos);
     }
 
     public double getBalance() {
-        return pasarADouble(balance.getText());
+        try {
+            wait.until(ExpectedConditions.visibilityOf(balance));
+            String text = balance.getText();
+            if (text == null || text.trim().isEmpty()) {
+                System.out.println("WARN: Balance vacío, retornando 0");
+                return 0.0;
+            }
+            return pasarADouble(text);
+        } catch (Exception e) {
+            System.out.println("WARN: Error obteniendo balance: " + e.getMessage());
+            return 0.0;
+        }
     }
 
     private double pasarADouble(String text) {
-        return Double.parseDouble(text.replace("$", "").replace(",", "").trim());
+        if (text == null || text.trim().isEmpty()) {
+            return 0.0;
+        }
+        try {
+            return Double.parseDouble(text.replace("$", "").replace(",", "").replace(" ", "").trim());
+        } catch (NumberFormatException e) {
+            System.out.println("WARN: No se pudo parsear '" + text + "', retornando 0");
+            return 0.0;
+        }
     }
 }

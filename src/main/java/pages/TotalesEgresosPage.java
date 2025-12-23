@@ -27,7 +27,6 @@ public class TotalesEgresosPage {
     @FindBy(css = "button-native")
     private WebElement atrasButton;
 
-
     public void clickAtrasButton() {
         atrasButton.click();
     }
@@ -44,18 +43,27 @@ public class TotalesEgresosPage {
         return pasarADouble(totalEgresos.getText());
     }
 
-
     private double pasarADouble(String text) {
-        String dou = text.replace("$", "").replace(",", "").trim();
-        return Double.parseDouble(dou);
+        if (text == null || text.trim().isEmpty()) {
+            return 0.0;
+        }
+        try {
+            String dou = text.replace("$", "").replace(",", "").replace(" ", "").trim();
+            if (dou.isEmpty()) {
+                return 0.0;
+            }
+            return Double.parseDouble(dou);
+        } catch (NumberFormatException e) {
+            System.out.println("WARN: No se pudo parsear '" + text + "', retornando 0");
+            return 0.0;
+        }
     }
 
     public void scrollHastaTotal() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript(
                 "arguments[0].scrollIntoView({block: 'center'});",
-                totalEgresos
-        );
+                totalEgresos);
     }
 
 }
