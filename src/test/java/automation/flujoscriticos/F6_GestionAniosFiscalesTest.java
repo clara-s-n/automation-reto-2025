@@ -151,19 +151,22 @@ public class F6_GestionAniosFiscalesTest extends BaseTestFlujos {
           isElementPresent(By.xpath("//*[contains(text(),'" + TEST_YEAR + "')]")) ||
           isElementPresent(By.cssSelector("ion-select, ion-segment, .year-selector"));
 
-      // Verificar presencia de cualquier selector de periodo o elementos de navegación
+      // Verificar presencia de cualquier selector de periodo o elementos de
+      // navegación
       List<WebElement> selectores = driver.findElements(
           By.cssSelector("ion-select, ion-segment, ion-picker, ion-datetime, .selector-anio"));
 
       System.out.println("Selectores de período encontrados: " + selectores.size());
 
-      // También verificar si hay datos de planillas o interfaz cargada (implica año seleccionado)
+      // También verificar si hay datos de planillas o interfaz cargada (implica año
+      // seleccionado)
       boolean hayDatos = isElementPresent(By.cssSelector("ion-card, ion-list, ion-item, ion-content, ion-grid"));
-      
-      // Verificar si estamos en una página de datos válida (URL incluye ingresos/egresos o componente cargado)
+
+      // Verificar si estamos en una página de datos válida (URL incluye
+      // ingresos/egresos o componente cargado)
       String currentUrl = driver.getCurrentUrl();
-      boolean enPaginaValida = currentUrl.contains("ingresos") || 
-          currentUrl.contains("egresos") || 
+      boolean enPaginaValida = currentUrl.contains("ingresos") ||
+          currentUrl.contains("egresos") ||
           currentUrl.contains("tabs") ||
           isElementPresent(By.tagName("ion-content"));
 

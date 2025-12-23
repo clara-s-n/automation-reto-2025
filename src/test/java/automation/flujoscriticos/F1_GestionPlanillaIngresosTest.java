@@ -131,14 +131,14 @@ public class F1_GestionPlanillaIngresosTest extends BaseTestFlujos {
         takeScreenshot("F1_04_boton_agregar");
 
         // Verificación básica de que existe el botón o la página cargó
-        boolean paginaFuncional = botonAgregarPresente || 
+        boolean paginaFuncional = botonAgregarPresente ||
             isElementPresent(By.xpath("//*[contains(text(),'Agregar')]")) ||
             isElementPresent(By.cssSelector("ion-content"));
         Assert.assertTrue("Debería existir botón para agregar fila o página funcional",
             paginaFuncional);
       } else {
         // Si no hay cards, verificar que la página cargó
-        Assert.assertTrue("La página de ingresos debería cargar", 
+        Assert.assertTrue("La página de ingresos debería cargar",
             isElementPresent(By.cssSelector("ion-content")));
       }
 
@@ -172,7 +172,7 @@ public class F1_GestionPlanillaIngresosTest extends BaseTestFlujos {
         takeScreenshot("F1_05_totales_planilla");
 
         // Los totales deberían estar visibles o al menos la página
-        Assert.assertTrue("Deberían mostrarse los totales de la planilla o contenido", 
+        Assert.assertTrue("Deberían mostrarse los totales de la planilla o contenido",
             totalesPresentes);
       } else {
         // Si no hay cards, verificar que la página cargó

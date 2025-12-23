@@ -83,9 +83,11 @@ public class F2_GestionPlanillaEgresosTest extends BaseTestFlujos {
       navigateToAdmin();
       waitForPageLoad();
 
-      // Buscar opción de categorías o egresos en administración (verificación flexible)
+      // Buscar opción de categorías o egresos en administración (verificación
+      // flexible)
       boolean categoriasPresentes = isElementPresent(
-          By.xpath("//*[contains(text(),'Categorías') or contains(text(),'Egresos') or contains(text(),'Categoria')]")) ||
+          By.xpath("//*[contains(text(),'Categorías') or contains(text(),'Egresos') or contains(text(),'Categoria')]"))
+          ||
           isElementPresent(By.cssSelector("ion-card, ion-item, ion-content"));
 
       takeScreenshot("F2_04_categorias_admin");

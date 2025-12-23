@@ -78,7 +78,7 @@ public class EgresosEditarEmpresaPage {
 
         // Buscar el botón editar
         WebElement editButton = findEditButton(js);
-        
+
         js.executeScript("arguments[0].scrollIntoView({block: 'center'});", editButton);
         Thread.sleep(500);
         js.executeScript("arguments[0].click();", editButton);

@@ -47,7 +47,8 @@ public class F3_CalculosAutomaticosTest extends BaseTestFlujos {
 
         takeScreenshot("F3_01_filas_planilla");
 
-        // Verificar que hay elementos con información de precio/saldo (verificación flexible)
+        // Verificar que hay elementos con información de precio/saldo (verificación
+        // flexible)
         boolean tieneInfoFinanciera = isElementPresent(By.xpath("//*[contains(text(),'$')]")) ||
             isElementPresent(By.xpath("//*[contains(@class,'precio')]")) ||
             isElementPresent(By.xpath("//*[contains(@class,'saldo')]")) ||
