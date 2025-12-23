@@ -53,7 +53,7 @@ public class EgresosEditarEmpresaPage {
         botonLogin.click();
     }
 
-    public void editarCI(String ci) throws InterruptedException {
+    public void editarEmpresa(String nombreEmpresa) throws InterruptedException {
         org.openqa.selenium.JavascriptExecutor js = (org.openqa.selenium.JavascriptExecutor) driver;
 
         wait.until(ExpectedConditions.elementToBeClickable(tabEmpresas));
@@ -76,17 +76,46 @@ public class EgresosEditarEmpresaPage {
         js.executeScript("arguments[0].click();", cards.get(0));
         Thread.sleep(3000);
 
-        // Buscar el botón editar - puede estar en diferentes lugares
+        // Buscar el botón editar
+        WebElement editButton = findEditButton(js);
+        
+        js.executeScript("arguments[0].scrollIntoView({block: 'center'});", editButton);
+        Thread.sleep(500);
+        js.executeScript("arguments[0].click();", editButton);
+        Thread.sleep(3000);
+
+        // Esperar formulario y buscar campo nombre
         wait.until(ExpectedConditions.presenceOfElementLocated(
-                org.openqa.selenium.By.cssSelector("ion-content")));
+                org.openqa.selenium.By.cssSelector("ion-input")));
         Thread.sleep(1000);
 
-        // Intentar encontrar el botón editar con diferentes selectores
-        WebElement editButton = null;
+        java.util.List<WebElement> ionInputs = driver.findElements(
+                org.openqa.selenium.By.cssSelector("ion-input"));
+
+        if (!ionInputs.isEmpty()) {
+            WebElement nombreInput = ionInputs.get(0); // Primer input suele ser nombre
+            js.executeScript("arguments[0].scrollIntoView({block: 'center'});", nombreInput);
+            Thread.sleep(200);
+
+            try {
+                WebElement nativeInput = nombreInput.findElement(org.openqa.selenium.By.cssSelector("input"));
+                js.executeScript("arguments[0].value = '';", nativeInput);
+                js.executeScript("arguments[0].value = arguments[1];", nativeInput, nombreEmpresa);
+                js.executeScript("arguments[0].dispatchEvent(new Event('input', {bubbles: true}));", nativeInput);
+            } catch (Exception e) {
+                js.executeScript("arguments[0].value = arguments[1];", nombreInput, nombreEmpresa);
+            }
+            js.executeScript("arguments[0].dispatchEvent(new Event('ionChange', {bubbles: true}));", nombreInput);
+        }
+
+        Thread.sleep(1000);
+        wait.until(ExpectedConditions.elementToBeClickable(botonGuardar));
+        js.executeScript("arguments[0].click();", botonGuardar);
+    }
+
+    private WebElement findEditButton(org.openqa.selenium.JavascriptExecutor js) {
         String[] editSelectors = {
                 "ion-button[color='primary']",
-                "ion-button:contains('Editar')",
-                "button[aria-label*='edit']",
                 "ion-fab-button",
                 ".edit-button",
                 "[routerlink*='editar']"
@@ -97,66 +126,25 @@ public class EgresosEditarEmpresaPage {
                 java.util.List<WebElement> buttons = driver.findElements(
                         org.openqa.selenium.By.cssSelector(selector));
                 if (!buttons.isEmpty()) {
-                    editButton = buttons.get(0);
-                    break;
+                    return buttons.get(0);
                 }
             } catch (Exception e) {
                 continue;
             }
         }
 
-        // Si no encuentra con CSS, intentar con XPath
-        if (editButton == null) {
+        try {
+            return driver.findElement(
+                    org.openqa.selenium.By
+                            .xpath("//ion-button[contains(translate(., 'EDITAR', 'editar'), 'editar')]"));
+        } catch (Exception e) {
             try {
-                editButton = driver.findElement(
-                        org.openqa.selenium.By
-                                .xpath("//ion-button[contains(translate(., 'EDITAR', 'editar'), 'editar')]"));
-            } catch (Exception e) {
-                // Intentar con ion-fab-button
-                try {
-                    editButton = driver.findElement(
-                            org.openqa.selenium.By.cssSelector("ion-fab-button"));
-                } catch (Exception ex) {
-                    throw new RuntimeException("No se encontró el botón de editar. Selectores probados: " +
-                            String.join(", ", editSelectors));
-                }
+                return driver.findElement(
+                        org.openqa.selenium.By.cssSelector("ion-fab-button"));
+            } catch (Exception ex) {
+                throw new RuntimeException("No se encontró el botón de editar.");
             }
         }
-
-        js.executeScript("arguments[0].scrollIntoView({block: 'center'});", editButton);
-        Thread.sleep(500);
-        js.executeScript("arguments[0].click();", editButton);
-        Thread.sleep(3000);
-
-        // Esperar a que aparezca el formulario
-        wait.until(ExpectedConditions.presenceOfElementLocated(
-                org.openqa.selenium.By.cssSelector("ion-input")));
-        Thread.sleep(1000);
-
-        // Buscar el campo CI - generalmente es el 5to input (índice 4)
-        java.util.List<WebElement> ionInputs = driver.findElements(
-                org.openqa.selenium.By.cssSelector("ion-input"));
-
-        if (ionInputs.size() >= 5) {
-            WebElement ciInput = ionInputs.get(4);
-            js.executeScript("arguments[0].scrollIntoView({block: 'center'});", ciInput);
-            Thread.sleep(200);
-
-            // Limpiar y establecer nuevo valor
-            try {
-                WebElement nativeInput = ciInput.findElement(org.openqa.selenium.By.cssSelector("input"));
-                js.executeScript("arguments[0].value = '';", nativeInput);
-                js.executeScript("arguments[0].value = arguments[1];", nativeInput, ci);
-                js.executeScript("arguments[0].dispatchEvent(new Event('input', {bubbles: true}));", nativeInput);
-            } catch (Exception e) {
-                js.executeScript("arguments[0].value = arguments[1];", ciInput, ci);
-            }
-            js.executeScript("arguments[0].dispatchEvent(new Event('ionChange', {bubbles: true}));", ciInput);
-        }
-
-        Thread.sleep(1000);
-        wait.until(ExpectedConditions.elementToBeClickable(botonGuardar));
-        js.executeScript("arguments[0].click();", botonGuardar);
     }
 
     public void editarCI(String ci) throws InterruptedException {
