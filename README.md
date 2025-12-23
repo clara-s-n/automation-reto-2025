@@ -237,13 +237,13 @@ public class [NombreDeLaVentanaPage] {
 
 ```bash
 # Ejecutar todos los tests
-mvn test
+mvn clean test
 
 # Ejecutar un test específico
-mvn test -Dtest=[FuncionalidadTest]
+mvn clean test -Dtest=[FuncionalidadTest]
 
 # Ejecutar con un navegador específico
-mvn test -Dbrowser=edge
+mvn clean test -Dbrowser=edge
 ```
 
 ## ⚙️ Configuración Inicial
