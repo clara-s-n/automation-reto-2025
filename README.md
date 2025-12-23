@@ -1,6 +1,6 @@
 ﻿# Automatización de Pruebas con Selenium WebDriver y Java
 
-## � Reporte de Tests
+## 📊 Reporte de Tests
 
 Para ver el estado actual de las pruebas automatizadas, consulta el [Reporte de Tests](TEST_FAILURE_REPORT.md).
 
@@ -8,7 +8,7 @@ Para ver el estado actual de las pruebas automatizadas, consulta el [Reporte de 
 
 ---
 
-## �📋 Convenciones de Código
+## 📋 Convenciones de Código
 
 ### 1. Nomenclatura de Clases de Test
 
