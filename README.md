@@ -1,14 +1,23 @@
 ﻿# Automatización de Pruebas con Selenium WebDriver y Java
 
-## 📋 Convenciones de Código
+## � Reporte de Tests
+
+Para ver el estado actual de las pruebas automatizadas, consulta el [Reporte de Tests](TEST_FAILURE_REPORT.md).
+
+**Última ejecución:** 23 de Diciembre de 2025 | **Tasa de éxito:** 97.4% (111/114 tests)
+
+---
+
+## �📋 Convenciones de Código
 
 ### 1. Nomenclatura de Clases de Test
 
 - **Clases de Test**: Deben seguir el patrón `[funcionalidadTest]`
+
   - Ejemplo: `LoginTest.java`, `RegistroTest.java`, `BusquedaTest.java`
 
 - **Métodos de Test**: El nombre del método debe ser el mismo que la funcionalidad que prueba
-  - Ejemplo: 
+  - Ejemplo:
     ```java
     @Test
     public void loginTest() {
@@ -28,11 +37,13 @@
 - **Creación del Driver**: Utilizar la clase `DriverFactory` ubicada en `src/main/java/utils/`
 
 **Ejemplo de uso:**
+
 ```java
 WebDriver driver = DriverFactory.getDriver("edge");
 ```
 
 **Archivo .env requerido:**
+
 ```properties
 WEBDRIVER_EDGE_PATH=C:\\ruta\\al\\msedgedriver.exe
 SCREENSHOTS_PATH=C:\\ruta\\donde\\guardar\\imagenes
@@ -47,6 +58,7 @@ SCREENSHOTS_PATH=C:\\ruta\\donde\\guardar\\imagenes
 ### 5. Comentarios y Documentación
 
 #### Comentario de Encabezado Obligatorio
+
 Cada archivo de test DEBE comenzar con un comentario indicando el autor:
 
 ```java
@@ -63,24 +75,26 @@ public class LoginTest {
 ```
 
 #### Comentarios Explicativos
+
 - Todos los tests deben contener comentarios explicativos sobre lo que hacen
 - Los comentarios deben ser claros y concisos
 - Explicar el "qué" y el "por qué" de cada acción importante
 
 **Ejemplo:**
+
 ```java
 @Test
 public void login() {
     // Navegar a la página de login
     driver.get("https://ejemplo.com/login");
-    
+
     // Ingresar credenciales válidas
     loginPage.ingresarUsuario("testuser");
     loginPage.ingresarPassword("password123");
-    
+
     // Hacer clic en el botón de iniciar sesión
     loginPage.clickBotonLogin();
-    
+
     // Verificar que el usuario fue redirigido al dashboard
     Assert.assertTrue(driver.getCurrentUrl().contains("/dashboard"));
 }
@@ -92,6 +106,7 @@ public void login() {
 - **Framework**: Utilizar JUnit
 
 **Ejemplos:**
+
 ```java
 // JUnit
 import org.junit.Assert;
@@ -141,32 +156,32 @@ import org.openqa.selenium.WebDriver;
 import utils.DriverFactory;
 
 public class [FuncionalidadTest] {
-    
+
     private WebDriver driver;
     private [NombrePage] nombrePage;
-    
+
     @Before
     public void setUp() {
         // Inicializar el driver usando DriverFactory
         driver = DriverFactory.getDriver("edge");
         driver.manage().window().maximize();
-        
+
         // Inicializar Page Object
         nombrePage = new [NombrePage](driver);
     }
-    
+
     @Test
     public void [nombreDelTest]() {
         // Navegar a la URL
         driver.get("https://url-de-la-aplicacion.com");
-        
+
         // Realizar acciones del test
         // ...
-        
+
         // Validar resultados con assertions
         Assert.assertTrue("Mensaje de error descriptivo", condicion);
     }
-    
+
     @After
     public void tearDown() {
         // Cerrar el navegador
@@ -193,25 +208,25 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class [NombreDeLaVentanaPage] {
-    
+
     private WebDriver driver;
-    
+
     // Localizar elementos usando XPath o Full XPath
     @FindBy(xpath = "//input[@id='ejemplo']")
     private WebElement elementoEjemplo;
-    
+
     // Constructor
     public [NombreDeLaVentanaPage](WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-    
+
     // Métodos de la página
     public void realizarAccion() {
         // Implementación del método
         elementoEjemplo.click();
     }
-    
+
     public String obtenerTexto() {
         return elementoEjemplo.getText();
     }
@@ -234,12 +249,14 @@ mvn test -Dbrowser=edge
 ## ⚙️ Configuración Inicial
 
 1. **Crear archivo `.env`** en la raíz del proyecto con las siguientes variables:
+
    ```properties
    WEBDRIVER_EDGE_PATH=C:\\ruta\\al\\msedgedriver.exe
    SCREENSHOTS_PATH=C:\\ruta\\screenshots
    ```
 
 2. **Instalar dependencias**:
+
    ```bash
    mvn clean install
    ```
