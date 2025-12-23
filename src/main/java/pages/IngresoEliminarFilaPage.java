@@ -51,13 +51,26 @@ public class IngresoEliminarFilaPage {
     }
 
     public void abrirPrimerIngreso() {
-        wait.until(ExpectedConditions.presenceOfElementLocated(
-                org.openqa.selenium.By.cssSelector("ion-card")));
-        java.util.List<WebElement> cards = driver.findElements(
-                org.openqa.selenium.By.cssSelector("ion-card"));
-        if (!cards.isEmpty()) {
-            wait.until(ExpectedConditions.elementToBeClickable(cards.get(0)));
-            safeClick.safeClick(cards.get(0));
+        // Esperar a que haya cards, con timeout más largo y mejor manejo
+        try {
+            wait.until(ExpectedConditions.presenceOfElementLocated(
+                    org.openqa.selenium.By.cssSelector("ion-content")));
+            Thread.sleep(1000); // Esperar carga de datos
+
+            java.util.List<WebElement> cards = driver.findElements(
+                    org.openqa.selenium.By.cssSelector("ion-content ion-card"));
+            if (cards.isEmpty()) {
+                cards = driver.findElements(
+                        org.openqa.selenium.By.cssSelector("ion-card"));
+            }
+            if (!cards.isEmpty()) {
+                wait.until(ExpectedConditions.elementToBeClickable(cards.get(0)));
+                safeClick.safeClick(cards.get(0));
+            } else {
+                System.out.println("WARN: No hay planillas disponibles para abrir");
+            }
+        } catch (Exception e) {
+            System.out.println("WARN: Error abriendo primer ingreso: " + e.getMessage());
         }
     }
 

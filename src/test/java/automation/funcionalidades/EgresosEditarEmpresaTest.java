@@ -1,4 +1,4 @@
-package automation;
+package automation.funcionalidades;
 
 import org.junit.Test;
 import pages.EgresosEditarEmpresaPage;
@@ -16,6 +16,9 @@ public class EgresosEditarEmpresaTest extends BaseTest {
 
         Thread.sleep(2000);
 
+        page.editarEmpresa("Empresa Nueva S.A. - Modificada");
+        Thread.sleep(2000);
+        
         page.editarCI("45678912");
 
         Thread.sleep(2000);

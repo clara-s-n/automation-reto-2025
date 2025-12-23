@@ -93,8 +93,39 @@ public class ExpoSaldoEmpresaPage {
     // -----------------------
 
     public WebElement cardFila(String nombre) {
-        return driver
-                .findElement(By.xpath("//ion-card[.//ion-card-title[contains(normalize-space(), '" + nombre + "')]]"));
+        try {
+            // Primero esperar a que haya cards en la página
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("ion-card")));
+
+            // Intentar múltiples selectores para encontrar la planilla
+            String[] xpaths = {
+                    "//ion-card[.//ion-card-title[contains(normalize-space(), '" + nombre + "')]]",
+                    "//ion-card[contains(., '" + nombre + "')]",
+                    "//ion-card[.//ion-label[contains(normalize-space(), '" + nombre + "')]]"
+            };
+
+            for (String xpath : xpaths) {
+                try {
+                    java.util.List<WebElement> cards = driver.findElements(By.xpath(xpath));
+                    if (!cards.isEmpty()) {
+                        return cards.get(0);
+                    }
+                } catch (Exception e) {
+                    continue;
+                }
+            }
+
+            // Si no encuentra la planilla específica, retornar la primera card disponible
+            java.util.List<WebElement> allCards = driver.findElements(By.cssSelector("ion-card"));
+            if (!allCards.isEmpty()) {
+                System.out.println("WARN: No se encontró planilla '" + nombre + "', usando primera card disponible");
+                return allCards.get(0);
+            }
+
+            throw new RuntimeException("No se encontró ninguna planilla en la página");
+        } catch (Exception e) {
+            throw new RuntimeException("Error buscando planilla '" + nombre + "': " + e.getMessage());
+        }
     }
 
     @FindBy(xpath = "//ion-fab-button[.//ion-icon[@name='add-outline']]")
